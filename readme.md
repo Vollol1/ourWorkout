@@ -27,9 +27,11 @@ Following features will be provided in the app.
 
 # Documentation 
 
-For further informations about the app concept and design sketches have a look at **/01_Documentation/OurWorkout_vX_X.pdf**. 
+For further informations about the app concept and design sketches have a look at **/01_Documentation/OurWorkout_vX_X.pdf**.
 
-# External ressources :information_source:
+# External resources :information_source:
+
+For 3d Party resources like icons, pictures and similar have a look at **/01_Documentation/resources.md**.
 
 ## Crossfit
 

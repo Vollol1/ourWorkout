@@ -1,2 +1,13 @@
 # Temp files for drawio
 **bkp
+
+# Android Studio related
+*.iml
+.gradle
+/local.properties
+/.idea
+.DS_Store
+/build
+/captures
+.externalNativeBuild
+.cxx
