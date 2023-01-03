@@ -11,7 +11,7 @@ This interface will represent click events on the exercise Card,
 and allow us to abstract the response to this event.
  */
 interface ExerciseListener {
-    fun onExerciseClick(exercise: ExerciseModel)
+    fun onExerciseClick(exercise: ExerciseModel, position: Int)
 }
 
 class ExerciseAdapter constructor(private var exersices: List<ExerciseModel>,
@@ -37,7 +37,7 @@ class ExerciseAdapter constructor(private var exersices: List<ExerciseModel>,
         fun bind(exercise: ExerciseModel, listener: ExerciseListener){
             binding.exerciseTitle.text = exercise.title
             binding.exerciseName.text = exercise.name
-            binding.root.setOnClickListener {listener.onExerciseClick(exercise)}
+            binding.root.setOnClickListener {listener.onExerciseClick(exercise, adapterPosition)}
         }
     }
 }

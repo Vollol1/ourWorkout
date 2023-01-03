@@ -20,6 +20,7 @@ class ExerciseListActivity : AppCompatActivity(), ExerciseListener {
     private lateinit var binding: ActivityExerciseListBinding
 
     lateinit var app: MainApp
+    private var position: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,11 +40,12 @@ class ExerciseListActivity : AppCompatActivity(), ExerciseListener {
         binding.recyclerView.adapter = ExerciseAdapter(app.exercises.findAll(),this)
     }
 
-    /******************Recyclerview response*******************/
+    /******************Recycler view*******************/
 
-    override fun onExerciseClick(exercise: ExerciseModel) {
+    override fun onExerciseClick(exercise: ExerciseModel, pos:Int) {
         val launcherIntent = Intent(this, ExerciseActivity::class.java)
         launcherIntent.putExtra("exercise_edit", exercise)
+        position = pos
         getClickResult.launch(launcherIntent)
     }
 
@@ -54,9 +56,12 @@ class ExerciseListActivity : AppCompatActivity(), ExerciseListener {
             (binding.recyclerView.adapter)?.
                     notifyItemRangeChanged(0, app.exercises.findAll().size)
         }
+        else {//deleting
+            if(it.resultCode==99) (binding.recyclerView.adapter)?.notifyItemRemoved(position)
+        }
     }
 
-    /******************Menu*******************/
+    /******************Menu bar*******************/
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_exercise_list_activity, menu)

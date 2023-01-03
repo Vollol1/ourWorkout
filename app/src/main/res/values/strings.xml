@@ -12,6 +12,7 @@
     <string name="button_addExercise">Add Exercise</string>
     <string name="button_saveExercise">Save Exercise</string>
     <string name="menu_cancelExerciseActivity">Cancel</string>
+    <string name="menu_deleteExerciseActivity">Delete</string>
 
     <!-- ExerciseListActivity-->
     <string name="menu_addExercise">Add</string>

@@ -22,6 +22,7 @@ class ExerciseActivity : AppCompatActivity() {
     lateinit var app: MainApp
 
     var exercise = ExerciseModel()
+    var edit = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,6 +39,7 @@ class ExerciseActivity : AppCompatActivity() {
         app = application as MainApp
 
         if(intent.hasExtra("exercise_edit")){
+            edit = true
             exercise = intent.extras?.getParcelable("exercise_edit")!!
             binding.exerciseTitle.setText(exercise.title)
             binding.exerciseName.setText(exercise.name)
@@ -51,7 +53,7 @@ class ExerciseActivity : AppCompatActivity() {
             exercise.title = binding.exerciseTitle.text.toString()
 
             if (exercise.title.isNotEmpty() and exercise.name.isNotEmpty()) {
-                if (intent.hasExtra("exercise_edit")) {
+                if (edit) {
                     app.exercises.update(exercise.copy())
                 }
 
@@ -74,11 +76,17 @@ class ExerciseActivity : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_exercise_activity, menu)
+        if(edit)menu.getItem(1).isVisible = true
         return super.onCreateOptionsMenu(menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId) {
+            R.id.item_delete -> {
+                app.exercises.delete(exercise)
+                setResult(99)
+                finish()
+            }
             R.id.item_cancel -> {
                 finish()
             }
