@@ -1,6 +1,7 @@
 package org.vollol.ourworkout.main
 
 import android.app.Application
+import org.vollol.ourworkout.models.ExerciseMemStore
 import org.vollol.ourworkout.models.ExerciseModel
 
 //both imports are needed for logging
@@ -9,7 +10,7 @@ import timber.log.Timber.i
 
 class MainApp : Application() {
 
-    val exercises = ArrayList<ExerciseModel>()
+    val exercises = ExerciseMemStore()
 
     override fun onCreate() {
         super.onCreate()

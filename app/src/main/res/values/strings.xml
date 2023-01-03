@@ -8,7 +8,9 @@
     <string name="app_name">ourWorkout</string>
     <string name="hint_exerciseTitle">Exercise Title</string>
     <string name="hint_exerciseName">Exercise Name</string>
+    <string name="snack_infosMissing">Please provide Title and Name</string>
     <string name="button_addExercise">Add Exercise</string>
+    <string name="button_saveExercise">Save Exercise</string>
     <string name="menu_cancelExerciseActivity">Cancel</string>
 
     <!-- ExerciseListActivity-->

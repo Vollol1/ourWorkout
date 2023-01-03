@@ -9,7 +9,6 @@ import org.vollol.ourworkout.R
 import org.vollol.ourworkout.databinding.ActivityExerciseBinding
 import org.vollol.ourworkout.main.MainApp
 import org.vollol.ourworkout.models.ExerciseModel
-import timber.log.Timber.i
 
 
 class ExerciseActivity : AppCompatActivity() {
@@ -21,6 +20,8 @@ class ExerciseActivity : AppCompatActivity() {
     private lateinit var binding: ActivityExerciseBinding
 
     lateinit var app: MainApp
+
+    var exercise = ExerciseModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,31 +36,38 @@ class ExerciseActivity : AppCompatActivity() {
 
         //initialize app from instantiated MainApp-Class
         app = application as MainApp
-        i("Exercise Activity started..")
+
+        if(intent.hasExtra("exercise_edit")){
+            exercise = intent.extras?.getParcelable("exercise_edit")!!
+            binding.exerciseTitle.setText(exercise.title)
+            binding.exerciseName.setText(exercise.name)
+
+            //change text on button to save exercise
+            binding.btnAdd.setText(R.string.button_saveExercise)
+        }
 
         binding.btnAdd.setOnClickListener() {
-            val exercise = ExerciseModel(binding.exerciseTitle.text.toString(),
-                                        binding.exerciseName.text.toString())
+            exercise.name = binding.exerciseName.text.toString()
+            exercise.title = binding.exerciseTitle.text.toString()
 
-            if(exercise.title.isNotEmpty() and exercise.name.isNotEmpty()) {
-                app.exercises.add(exercise.copy())
-                i("add Button Pressed: $exercise.title, $exercise.name")
+            if (exercise.title.isNotEmpty() and exercise.name.isNotEmpty()) {
+                if (intent.hasExtra("exercise_edit")) {
+                    app.exercises.update(exercise.copy())
+                }
+
+                else {
+                    app.exercises.create(exercise.copy())
+                }
 
                 //finish activity- to end intend, which is created over an other activity
                 setResult(RESULT_OK)
                 finish()
             }
+
             else{
                 Snackbar
-                    .make(it,"Please Enter a title and name", Snackbar.LENGTH_LONG)
+                    .make(it,R.string.snack_infosMissing, Snackbar.LENGTH_LONG)
                     .show()
-            }
-
-            i("all added exercises till now:")
-            for(ex in app.exercises){
-                val title = ex.title.toString()
-                val name = ex.name.toString()
-                i("Title: $title| Name: $name")
             }
         }
     }

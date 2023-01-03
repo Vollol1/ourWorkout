@@ -6,7 +6,16 @@ import androidx.recyclerview.widget.RecyclerView
 import org.vollol.ourworkout.databinding.CardExerciseBinding
 import org.vollol.ourworkout.models.ExerciseModel
 
-class ExerciseAdapter constructor(private var exersices: List<ExerciseModel>):
+/*
+This interface will represent click events on the exercise Card,
+and allow us to abstract the response to this event.
+ */
+interface ExerciseListener {
+    fun onExerciseClick(exercise: ExerciseModel)
+}
+
+class ExerciseAdapter constructor(private var exersices: List<ExerciseModel>,
+                                  private val listener: ExerciseListener):
     RecyclerView.Adapter<ExerciseAdapter.MainHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainHolder{
@@ -17,7 +26,7 @@ class ExerciseAdapter constructor(private var exersices: List<ExerciseModel>):
 
     override fun onBindViewHolder(holder: MainHolder, position: Int) {
         val exercise = exersices[holder.adapterPosition]
-        holder.bind(exercise)
+        holder.bind(exercise, listener)
     }
 
     override fun getItemCount(): Int = exersices.size
@@ -25,9 +34,11 @@ class ExerciseAdapter constructor(private var exersices: List<ExerciseModel>):
     class MainHolder(private val binding: CardExerciseBinding):
         RecyclerView.ViewHolder(binding.root){
 
-        fun bind(exercise: ExerciseModel){
+        fun bind(exercise: ExerciseModel, listener: ExerciseListener){
             binding.exerciseTitle.text = exercise.title
             binding.exerciseName.text = exercise.name
+            binding.root.setOnClickListener {listener.onExerciseClick(exercise)}
         }
     }
 }
+

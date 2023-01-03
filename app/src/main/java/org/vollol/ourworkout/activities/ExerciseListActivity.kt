@@ -4,21 +4,18 @@ import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuItem
-import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import org.vollol.ourworkout.R
 import org.vollol.ourworkout.adapters.ExerciseAdapter
+import org.vollol.ourworkout.adapters.ExerciseListener
 import org.vollol.ourworkout.databinding.ActivityExerciseListBinding
-import org.vollol.ourworkout.databinding.CardExerciseBinding
 import org.vollol.ourworkout.main.MainApp
 import org.vollol.ourworkout.models.ExerciseModel
 
-class ExerciseListActivity : AppCompatActivity() {
+class ExerciseListActivity : AppCompatActivity(), ExerciseListener {
 
     private lateinit var binding: ActivityExerciseListBinding
 
@@ -39,8 +36,27 @@ class ExerciseListActivity : AppCompatActivity() {
         //include recyclerview
         val layoutManager = LinearLayoutManager(this)
         binding.recyclerView.layoutManager = layoutManager
-        binding.recyclerView.adapter = ExerciseAdapter(app.exercises)
+        binding.recyclerView.adapter = ExerciseAdapter(app.exercises.findAll(),this)
     }
+
+    /******************Recyclerview response*******************/
+
+    override fun onExerciseClick(exercise: ExerciseModel) {
+        val launcherIntent = Intent(this, ExerciseActivity::class.java)
+        launcherIntent.putExtra("exercise_edit", exercise)
+        getClickResult.launch(launcherIntent)
+    }
+
+    private val getClickResult = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) {
+        if(it.resultCode == Activity.RESULT_OK) {
+            (binding.recyclerView.adapter)?.
+                    notifyItemRangeChanged(0, app.exercises.findAll().size)
+        }
+    }
+
+    /******************Menu*******************/
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_exercise_list_activity, menu)
@@ -65,7 +81,7 @@ class ExerciseListActivity : AppCompatActivity() {
         ){
             if(it.resultCode == Activity.RESULT_OK) {
                 (binding.recyclerView.adapter)?.
-                notifyItemRangeChanged(0, app.exercises.size)
+                notifyItemRangeChanged(0, app.exercises.findAll().size)
             }
         }
 }
