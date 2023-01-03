@@ -1,11 +1,16 @@
 <resources>
-    <!-- exerciseActivity-->
+    <!-- CockpitActivity-->
+    <string name="button_navWorkout">Workout</string>
+    <string name="button_navExercise">Manage Exercises</string>
+
+
+    <!-- ExerciseActivity-->
     <string name="app_name">ourWorkout</string>
     <string name="hint_exerciseTitle">Exercise Title</string>
     <string name="hint_exerciseName">Exercise Name</string>
     <string name="button_addExercise">Add Exercise</string>
     <string name="menu_cancelExerciseActivity">Cancel</string>
 
-    <!-- exerciseListActivity-->
+    <!-- ExerciseListActivity-->
     <string name="menu_addExercise">Add</string>
 </resources>

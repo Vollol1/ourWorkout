@@ -48,6 +48,7 @@ class ExerciseListActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        //check if the id is equal to the item_add, defined in menu_exercise_list_activity.xml
         when(item.itemId) {
             R.id.item_add -> {
                 val launcherIntent = Intent(this,
