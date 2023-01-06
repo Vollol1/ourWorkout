@@ -1,7 +1,8 @@
 <resources>
     <!-- CockpitActivity-->
-    <string name="button_navWorkout">Workout</string>
-    <string name="button_navExercise">Manage Exercises</string>
+    <string name="cockpit_activity_button_navManageWorkouts">Manage Workouts</string>
+    <string name="cockpit_activity_button_navManageExercises">Manage Exercises</string>
+    <string name="cockpit_activity_button_navShowResults">Show Results</string>
 
 
     <!-- ExerciseActivity-->
@@ -15,5 +16,6 @@
     <string name="menu_deleteExerciseActivity">Delete</string>
 
     <!-- ExerciseListActivity-->
+    <string name="exercise_list_activity_toolbar_title">"Manage Exercises"</string>
     <string name="menu_addExercise">Add</string>
 </resources>

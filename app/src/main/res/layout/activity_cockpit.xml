@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -7,68 +7,89 @@
     android:layout_height="match_parent"
     tools:context="org.vollol.ourworkout.activities.CockpitActivity">
 
-    <RelativeLayout
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:background="@color/colorAccent"
+        android:fitsSystemWindows="true"
+        app:elevation="0dip"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
-        <com.google.android.material.appbar.AppBarLayout
-            android:id="@+id/appBarLayout"
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorAccent"
-            android:fitsSystemWindows="true"
-            app:elevation="0dip"
-            app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+            app:titleTextColor="@color/colorPrimary" />
+    </com.google.android.material.appbar.AppBarLayout>
 
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbarCancel"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:titleTextColor="@color/colorPrimary" />
-        </com.google.android.material.appbar.AppBarLayout>
 
-        <ScrollView
+   <LinearLayout
+       android:id="@+id/linearLayout"
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       android:orientation="vertical"
+       app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:id="@+id/linearLayoutButtons"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@id/appBarLayout"
-            android:fillViewport="true">
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
-            <LinearLayout
+            <Button
+                android:id="@+id/btnNavManageWorkouts"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_marginVertical="16dp"
+                android:layout_marginHorizontal="4dp"
+                android:layout_weight="1"
+                android:background="@color/colorAccent"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:stateListAnimator="@null"
+                android:text="@string/cockpit_activity_button_navManageWorkouts"
+                android:textColor="@color/colorPrimary"
+                android:textSize="14sp"/>
+
+            <Button
+                android:id="@+id/btnNavManageExercises"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="16dp"
+                android:layout_marginHorizontal="4dp"
+                android:layout_weight="1"
+                android:background="@color/colorAccent"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:stateListAnimator="@null"
+                android:text="@string/cockpit_activity_button_navManageExercises"
+                android:textColor="@color/colorPrimary"
+                android:textSize="14sp" />
+
+            <Button
+                android:id="@+id/btnNavShowResults"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="16dp"
+                android:layout_marginHorizontal="4dp"
+                android:layout_weight="1"
+                android:background="@color/colorAccent"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:stateListAnimator="@null"
+                android:text="@string/cockpit_activity_button_navShowResults"
+                android:textColor="@color/colorPrimary"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+
+       <!--androidx.recyclerview.widget.RecyclerView
+           android:id="@+id/recyclerViewDoWorkout"
+           android:layout_width="match_parent"
+           android:layout_height="match_parent"
+           android:scrollbars="vertical"
+           app:layout_behavior="@string/appbar_scrolling_view_behavior"/-->
 
 
-                <Button
-                    android:id="@+id/btnNavWorkout"
-                    android:layout_width="match_parent"
-                    android:layout_height="240dp"
-                    android:layout_margin="16dp"
-                    android:background="@color/colorAccent"
-                    android:paddingTop="8dp"
-                    android:paddingBottom="8dp"
-                    android:stateListAnimator="@null"
-                    android:text="@string/button_navWorkout"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="16sp" />
-
-                <Button
-                    android:id="@+id/btnNavExercise"
-                    android:layout_width="match_parent"
-                    android:layout_height="240dp"
-                    android:layout_margin="16dp"
-                    android:background="@color/colorAccent"
-                    android:paddingTop="8dp"
-                    android:paddingBottom="8dp"
-                    android:stateListAnimator="@null"
-                    android:text="@string/button_navExercise"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="16sp" />
-
-            </LinearLayout>
-        </ScrollView>
-
-    </RelativeLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+   </LinearLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
