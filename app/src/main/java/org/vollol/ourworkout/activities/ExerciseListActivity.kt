@@ -13,7 +13,7 @@ import org.vollol.ourworkout.adapters.ExerciseAdapter
 import org.vollol.ourworkout.adapters.ExerciseListener
 import org.vollol.ourworkout.databinding.ActivityExerciseListBinding
 import org.vollol.ourworkout.main.MainApp
-import org.vollol.ourworkout.models.ExerciseModel
+import org.vollol.ourworkout.models.Exercise
 
 class ExerciseListActivity : AppCompatActivity(), ExerciseListener {
 
@@ -44,7 +44,7 @@ class ExerciseListActivity : AppCompatActivity(), ExerciseListener {
 
     /******************Recycler view*******************/
 
-    override fun onExerciseClick(exercise: ExerciseModel, pos:Int) {
+    override fun onExerciseClick(exercise: Exercise, pos:Int) {
         val launcherIntent = Intent(this, ExerciseActivity::class.java)
         launcherIntent.putExtra("exercise_edit", exercise)
         position = pos

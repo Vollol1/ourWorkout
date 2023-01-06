@@ -8,8 +8,7 @@ import com.google.android.material.snackbar.Snackbar
 import org.vollol.ourworkout.R
 import org.vollol.ourworkout.databinding.ActivityExerciseBinding
 import org.vollol.ourworkout.main.MainApp
-import org.vollol.ourworkout.models.ExerciseModel
-
+import org.vollol.ourworkout.models.Exercise
 
 class ExerciseActivity : AppCompatActivity() {
 
@@ -21,7 +20,7 @@ class ExerciseActivity : AppCompatActivity() {
 
     lateinit var app: MainApp
 
-    var exercise = ExerciseModel()
+    var exercise = Exercise()
     var edit = false
 
     override fun onCreate(savedInstanceState: Bundle?) {

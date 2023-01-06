@@ -9,20 +9,20 @@ internal fun getId(): Long{
 }
 
 class ExerciseMemStore : ExerciseStore {
-    val exercises = ArrayList<ExerciseModel>()
+    val exercises = ArrayList<Exercise>()
 
-    override fun findAll(): List<ExerciseModel>{
+    override fun findAll(): List<Exercise>{
         return exercises
     }
 
-    override fun create(exercise: ExerciseModel){
+    override fun create(exercise: Exercise){
         exercise.id = getId()
         exercises.add(exercise)
         logAll()
     }
 
-    override fun update(exercise: ExerciseModel) {
-        var foundExercise: ExerciseModel? = exercises.find {p -> p.id == exercise.id}
+    override fun update(exercise: Exercise) {
+        var foundExercise: Exercise? = exercises.find {p -> p.id == exercise.id}
         if (foundExercise != null) {
             foundExercise.title = exercise.title
             foundExercise.name = exercise.name
@@ -30,7 +30,7 @@ class ExerciseMemStore : ExerciseStore {
         }
     }
 
-    override fun delete(exercise: ExerciseModel) {
+    override fun delete(exercise: Exercise) {
         exercises.remove(exercise)
     }
 
