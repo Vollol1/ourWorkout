@@ -28,8 +28,10 @@ class ExerciseListActivity : AppCompatActivity(), ExerciseListener {
         setContentView(binding.root)
 
         //including the menu-toolbar
-        binding.toolbarAdd.title = title
-        setSupportActionBar(binding.toolbarAdd)
+        binding.toolbar.setTitle(R.string.exercise_list_activity_toolbar_title)
+        setSupportActionBar(binding.toolbar)
+
+
 
         //refer to MainApp object
         app = application as MainApp
