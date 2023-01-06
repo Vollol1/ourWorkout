@@ -13,3 +13,7 @@
 .externalNativeBuild
 .cxx
 local.properties
+
+
+# documentation - drawio temp files
+/01_Documentation/**.bkp
