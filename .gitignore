@@ -16,4 +16,4 @@ local.properties
 
 
 # documentation - drawio temp files
-/01_Documentation/**.bkp
+/01_Documentation/*.drawio.*
