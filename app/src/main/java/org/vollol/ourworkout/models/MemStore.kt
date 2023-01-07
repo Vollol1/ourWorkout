@@ -2,10 +2,20 @@ package org.vollol.ourworkout.models
 
 import timber.log.Timber
 
-var lastId = 0L
+var lastExerciseId = 0L
+var lastWorkoutBlueprintId = 0L
+var lastWorkoutDoneId = 0L
 
-internal fun getId(): Long{
-    return lastId++
+internal fun getExerciseId(): Long{
+    return lastExerciseId++
+}
+
+internal fun getWorkoutBlueprintId(): Long{
+    return lastWorkoutBlueprintId++
+}
+
+internal fun getWorkoutDoneId(): Long{
+    return lastWorkoutDoneId++
 }
 
 class ExerciseMemStore : ExerciseStore {
@@ -16,7 +26,7 @@ class ExerciseMemStore : ExerciseStore {
     }
 
     override fun create(exercise: Exercise){
-        exercise.id = getId()
+        exercise.id = getExerciseId()
         exercises.add(exercise)
         logAll()
     }
