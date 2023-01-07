@@ -4,13 +4,13 @@
 
     <item
         android:id="@+id/item_cancel"
-        android:title="@string/menu_cancelExerciseActivity"
+        android:title="@string/exercise_activity_menu_cancelExerciseActivity"
         app:showAsAction="always" />
     <item
         android:visible="false"
         android:id="@+id/item_delete"
         android:icon="@android:drawable/ic_menu_delete"
-        android:title="@string/menu_deleteExerciseActivity"
+        android:title="@string/exercise_activity_menu_deleteExerciseActivity"
         app:showAsAction="always" />
 
 </menu>

@@ -4,14 +4,18 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.Spinner
 import com.google.android.material.snackbar.Snackbar
 import org.vollol.ourworkout.R
 import org.vollol.ourworkout.databinding.ActivityExerciseBinding
 import org.vollol.ourworkout.main.MainApp
-import org.vollol.ourworkout.models.ExerciseModel
+import org.vollol.ourworkout.models.Exercise
+import timber.log.Timber.i
 
-
-class ExerciseActivity : AppCompatActivity() {
+class ExerciseActivity : AppCompatActivity(){
 
     /* ActivityExerciseBinding - this is an auto generated class, which allows to have access on all
     *  content defined in the according layout description (.xml-file)
@@ -21,7 +25,7 @@ class ExerciseActivity : AppCompatActivity() {
 
     lateinit var app: MainApp
 
-    var exercise = ExerciseModel()
+    var exercise = Exercise()
     var edit = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,19 +42,48 @@ class ExerciseActivity : AppCompatActivity() {
         //initialize app from instantiated MainApp-Class
         app = application as MainApp
 
+        /***********************************spinner********************************************/
+        val spinner = findViewById<Spinner>(R.id.exerciseUnit)
+        //ArrayAdapter, which shows strings out of a string-array
+        val items = resources.getStringArray(R.array.exercise_activity_units)
+        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, items)
+        //Set dropdown-layout for the spinner
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        //set adapter for the spinner
+        spinner.adapter = adapter
+
+        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                val item = parent?.getItemAtPosition(position).toString()
+                i("Spinner: $item")
+                exercise.unit = item
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                // is called, if nothing is selected - e.g. at the start
+            }
+        }
+        /*********************************spinner-end******************************************/
+
         if(intent.hasExtra("exercise_edit")){
             edit = true
             exercise = intent.extras?.getParcelable("exercise_edit")!!
+            //Set already stored values in text-fields
             binding.exerciseTitle.setText(exercise.title)
             binding.exerciseName.setText(exercise.name)
+            binding.exerciseDesc.setText(exercise.desc)
+            //Set already stored values in the spinner
+            val position = adapter.getPosition(exercise.unit)
+            spinner.setSelection(position)
 
             //change text on button to save exercise
-            binding.btnAdd.setText(R.string.button_saveExercise)
+            binding.btnAdd.setText(R.string.exercise_activity_button_saveExercise)
         }
 
         binding.btnAdd.setOnClickListener() {
             exercise.name = binding.exerciseName.text.toString()
             exercise.title = binding.exerciseTitle.text.toString()
+            exercise.desc = binding.exerciseDesc.text.toString()
 
             if (exercise.title.isNotEmpty() and exercise.name.isNotEmpty()) {
                 if (edit) {
@@ -68,11 +101,14 @@ class ExerciseActivity : AppCompatActivity() {
 
             else{
                 Snackbar
-                    .make(it,R.string.snack_infosMissing, Snackbar.LENGTH_LONG)
+                    .make(it,R.string.exercise_activity_snack_infosMissing, Snackbar.LENGTH_LONG)
                     .show()
             }
         }
     }
+
+
+    /******************Menu bar*******************/
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_exercise_activity, menu)

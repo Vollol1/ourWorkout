@@ -15,14 +15,14 @@ const val JSON_FILE = "exercises.json"
 val gsonBuilder: Gson = GsonBuilder().setPrettyPrinting()
     .registerTypeAdapter(Uri::class.java, UriParser())
     .create()
-val listType: Type = object : TypeToken<ArrayList<ExerciseModel>>() {}.type
+val listType: Type = object : TypeToken<ArrayList<Exercise>>() {}.type
 
 fun generateRandomId(): Long{
     return Random().nextLong()
 }
 
 class ExerciseJSONStore(private val context: Context) :ExerciseStore{
-    var exercises = mutableListOf<ExerciseModel>()
+    var exercises = mutableListOf<Exercise>()
 
     init {
         if(exists(context, JSON_FILE)) {
@@ -30,29 +30,31 @@ class ExerciseJSONStore(private val context: Context) :ExerciseStore{
         }
     }
 
-    override fun findAll(): MutableList<ExerciseModel> {
+    override fun findAll(): MutableList<Exercise> {
         logAll()
         return exercises
     }
 
-    override fun create(exercise: ExerciseModel){
+    override fun create(exercise: Exercise){
         exercise.id = generateRandomId()
         exercises.add(exercise)
         serialize()
     }
 
-    override fun update(exercise: ExerciseModel){
-        val exercisesList = findAll() as ArrayList<ExerciseModel>
-        var foundExercise: ExerciseModel? = exercisesList.find {p -> p.id == exercise.id}
+    override fun update(exercise: Exercise){
+        val exercisesList = findAll() as ArrayList<Exercise>
+        var foundExercise: Exercise? = exercisesList.find {p -> p.id == exercise.id}
 
         if (foundExercise != null) {
             foundExercise.title = exercise.title
             foundExercise.name = exercise.name
+            foundExercise.desc = exercise.desc
+            foundExercise.unit = exercise.unit
         }
         serialize()
     }
 
-    override fun delete(exercise: ExerciseModel) {
+    override fun delete(exercise: Exercise) {
         exercises.remove(exercise)
         serialize()
     }
