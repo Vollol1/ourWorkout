@@ -36,7 +36,8 @@ class ExerciseAdapter constructor(private var exersices: List<Exercise>,
 
         fun bind(exercise: Exercise, listener: ExerciseListener){
             binding.exerciseTitle.text = exercise.title
-            binding.exerciseName.text = exercise.name
+            binding.exerciseDesc.text = exercise.desc
+            binding.exerciseUnit.text = exercise.unit
             binding.root.setOnClickListener {listener.onExerciseClick(exercise, adapterPosition)}
         }
     }

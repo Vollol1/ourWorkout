@@ -43,10 +43,10 @@
                 <EditText
                     android:id="@+id/exerciseTitle"
                     android:layout_width="match_parent"
-                    android:layout_height="45dp"
+                    android:layout_height="48dp"
                     android:layout_margin="8dp"
                     android:autofillHints="hint"
-                    android:hint="@string/hint_exerciseTitle"
+                    android:hint="@string/exercise_activity_hint_exerciseTitle"
                     android:inputType="text"
                     android:maxLength="25"
                     android:maxLines="1"
@@ -57,16 +57,62 @@
                 <EditText
                     android:id="@+id/exerciseName"
                     android:layout_width="match_parent"
-                    android:layout_height="45dp"
+                    android:layout_height="48dp"
                     android:layout_margin="8dp"
                     android:autofillHints="hint"
-                    android:hint="@string/hint_exerciseName"
+                    android:hint="@string/exercise_activity_hint_exerciseName"
                     android:inputType="text"
                     android:maxLength="25"
                     android:maxLines="1"
                     android:padding="8dp"
                     android:textColor="@color/colorPrimary"
                     android:textSize="14sp" />
+
+                <EditText
+                    android:id="@+id/exerciseDesc"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_margin="8dp"
+                    android:autofillHints="hint"
+                    android:hint="@string/exercise_activity_hint_exerciseDescription"
+                    android:inputType="text"
+                    android:maxLength="250"
+                    android:maxLines="1"
+                    android:padding="8dp"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="14sp" />
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_margin="8dp"
+                    android:padding="8dp">
+
+                    <TextView
+                        android:id="@+id/textView"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:layout_marginRight="8dp"
+                        android:layout_weight="5"
+                        android:text="@string/exercise_activity_hint_exerciseUnit"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="16sp" />
+
+                    <Spinner
+                        android:id="@+id/exerciseUnit"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:layout_marginLeft="8dp"
+                        android:layout_weight="1"
+                        android:autofillHints="hint"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="14sp" />
+
+                </LinearLayout>
+
+
 
                 <Button
                     android:id="@+id/btnAdd"
@@ -77,9 +123,10 @@
                     android:paddingTop="8dp"
                     android:paddingBottom="8dp"
                     android:stateListAnimator="@null"
-                    android:text="@string/button_addExercise"
+                    android:text="@string/exercise_activity_button_addExercise"
                     android:textColor="@color/colorPrimary"
                     android:textSize="16sp" />
+
             </LinearLayout>
         </ScrollView>
 

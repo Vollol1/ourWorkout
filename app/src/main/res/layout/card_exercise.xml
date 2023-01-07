@@ -21,11 +21,22 @@
             tools:text="A Title" />
 
         <TextView
-            android:id="@+id/exerciseName"
+            android:id="@+id/exerciseDesc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/exerciseTitle"
             tools:text="A Description" />
+
+        <TextView
+            android:id="@+id/exerciseUnit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/exerciseTitle"
+            android:layout_alignBottom="@+id/exerciseTitle"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:text="A Unit" />
 
     </RelativeLayout>
 </androidx.cardview.widget.CardView>
