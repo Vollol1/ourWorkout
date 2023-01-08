@@ -11,7 +11,7 @@
     <string name="exercise_activity_hint_exerciseTitle">Title</string>
     <string name="exercise_activity_hint_exerciseName">Name</string>
     <string name="exercise_activity_hint_exerciseDescription">Description</string>
-    <string name="exercise_activity_hint_exerciseUnit">Unit:</string>
+    <string name="exercise_activity_text_exerciseUnit">Unit:</string>
     <string name="exercise_activity_snack_infosMissing">Please provide at least a Title</string>
     <string name="exercise_activity_button_addExercise">Add Exercise</string>
     <string name="exercise_activity_button_saveExercise">Save Exercise</string>
@@ -33,7 +33,10 @@
     <string name="manage_workout_activity_button_saveExercise">Save Workout</string>
     <string name="manage_workout_activity_button_addStrengthExercise">Add Strength-Exercise</string>
     <string name="manage_workout_activity_button_addEnduranceExercise">Add Endurance-Exercise</string>
-    <string name="manage_workout_snack_infosMissing">Please provide at least a Title</string>
+    <string name="manage_workout_activity_snack_infosMissing">Please provide at least a Title</string>
+    <string name="manage_workout_activity_text_infosMissing">Please provide at least a Title</string>
+    <string name="manage_workout_activity_text_addStrengthExercise">Add strength Exercises</string>
+    <string name="manage_workout_activity_text_addEnduranceExercise">Add endurance Exercises</string>
 
     <!-- ManageWorkoutListActivity-->
     <string name="manage_workout_list_activity_toolbar_title">"Manage Workouts"</string>

@@ -53,32 +53,44 @@
                     android:textColor="@color/colorPrimary"
                     android:textSize="14sp" />
 
-
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-                    <Button
-                        android:id="@+id/btnAddStrengthExercise"
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="32dp"
-                        android:background="@color/colorAccent"
-                        android:paddingTop="8dp"
-                        android:paddingBottom="8dp"
-                        android:stateListAnimator="@null"
-                        android:text="@string/manage_workout_activity_button_addStrengthExercise"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="14sp" />
+                        android:orientation="horizontal"
+                        android:layout_margin="8dp"
+                        android:padding="8dp">
+
+                        <TextView
+                            android:id="@+id/textView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="48dp"
+                            android:layout_marginRight="8dp"
+                            android:text="@string/manage_workout_activity_text_addStrengthExercise"
+                            android:gravity="center"
+                            android:textSize="14sp" />
+
+                        <Spinner
+                            android:id="@+id/strengthExerciseSpinner"
+                            android:layout_width="match_parent"
+                            android:layout_height="48dp"
+                            android:layout_marginLeft="8dp"
+                            android:textSize="14sp" />
+
+                    </LinearLayout>
+
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/recyclerViewStrengthExercise"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="32dp"
+                        android:layout_margin="16dp"
                         android:scrollbars="vertical"
-                        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+                        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
                 </LinearLayout>
 
@@ -87,18 +99,30 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-                    <Button
-                        android:id="@+id/btnAddEnduranceExercise"
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="32dp"
-                        android:background="@color/colorAccent"
-                        android:paddingTop="8dp"
-                        android:paddingBottom="8dp"
-                        android:stateListAnimator="@null"
-                        android:text="@string/manage_workout_activity_button_addEnduranceExercise"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="14sp" />
+                        android:orientation="horizontal"
+                        android:layout_margin="8dp"
+                        android:padding="8dp">
+
+                        <TextView
+                            android:id="@+id/textView2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="48dp"
+                            android:layout_marginRight="8dp"
+                            android:text="@string/manage_workout_activity_text_addEnduranceExercise"
+                            android:gravity="center"
+                            android:textSize="14sp" />
+
+                        <Spinner
+                            android:id="@+id/enduranceExerciseSpinner"
+                            android:layout_width="match_parent"
+                            android:layout_height="48dp"
+                            android:layout_marginLeft="8dp"
+                            android:textSize="14sp" />
+
+                    </LinearLayout>
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/recyclerViewEnduranceExercise"
