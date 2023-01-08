@@ -60,16 +60,7 @@ class CockpitActivity : AppCompatActivity(), WorkoutListener {
     /***************************Reload Recyclerview*****************************/
     override fun onResume() {
         super.onResume()
-
-        (binding.recyclerViewDoWorkout.adapter)?.notifyItemRemoved(position)
-        //reload recyclerview
-        (binding.recyclerViewDoWorkout.adapter)?.
-        notifyItemRangeChanged(0, app.workouts.findAll().size)
-
-        //both methods are called, it works, i don't know why, but if an item is removed, it will also
-        //be not shown in the cockpit anymore
-
-
+        (binding.recyclerViewDoWorkout.adapter)?.notifyDataSetChanged()
     }
 
     /******************Recycler view*******************/
