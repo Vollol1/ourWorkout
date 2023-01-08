@@ -74,8 +74,7 @@ class ExerciseListActivity : AppCompatActivity(), ExerciseListener {
         //check if the id is equal to the item_add, defined in menu_exercise_list_activity.xml
         when(item.itemId) {
             R.id.item_add -> {
-                val launcherIntent = Intent(this,
-                    ExerciseActivity::class.java)
+                val launcherIntent = Intent(this, ExerciseActivity::class.java)
                 getResult.launch(launcherIntent)
             }
         }

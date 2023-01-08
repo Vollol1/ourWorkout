@@ -75,7 +75,7 @@
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/recyclerViewStrengthExercise"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_margin="32dp"
                         android:scrollbars="vertical"
                         app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
@@ -103,7 +103,7 @@
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/recyclerViewEnduranceExercise"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_margin="32dp"
                         android:scrollbars="vertical"
                         app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
