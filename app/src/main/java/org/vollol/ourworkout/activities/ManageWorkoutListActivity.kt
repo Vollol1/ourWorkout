@@ -38,6 +38,8 @@ class ManageWorkoutListActivity : AppCompatActivity(), WorkoutListener {
         val layoutManager = LinearLayoutManager(this)
         binding.recyclerView.layoutManager = layoutManager
         binding.recyclerView.adapter = WorkoutAdapter(app.workouts.findAll(),this)
+
+
     }
 
     /******************Recycler view*******************/
@@ -60,6 +62,7 @@ class ManageWorkoutListActivity : AppCompatActivity(), WorkoutListener {
             if(it.resultCode==99) (binding.recyclerView.adapter)?.notifyItemRemoved(position)
         }
     }
+
 
     /******************Menu bar*******************/
 

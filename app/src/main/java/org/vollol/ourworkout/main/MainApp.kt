@@ -1,6 +1,7 @@
 package org.vollol.ourworkout.main
 
 import android.app.Application
+import org.vollol.ourworkout.adapters.WorkoutAdapter
 import org.vollol.ourworkout.models.ExerciseJSONStore
 import org.vollol.ourworkout.models.ExerciseStore
 import org.vollol.ourworkout.models.WorkoutJSONStore

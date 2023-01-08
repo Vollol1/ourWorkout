@@ -3,6 +3,7 @@
     <string name="cockpit_activity_button_navManageWorkouts">Manage Workouts</string>
     <string name="cockpit_activity_button_navManageExercises">Manage Exercises</string>
     <string name="cockpit_activity_button_navShowResults">Show Results</string>
+    <string name="cockpit_activity_text_startWorkout">Choose Workout to start</string>
 
 
     <!-- ExerciseActivity-->
