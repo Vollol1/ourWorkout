@@ -129,9 +129,9 @@ class WorkoutJSONStore(private val context: Context, private val isDoneWorkout: 
         if (foundWorkout != null) {
             foundWorkout.timeStamp = workout.timeStamp
             foundWorkout.title = workout.title
-            foundWorkout.strengthExercise = workout.strengthExercise
+            foundWorkout.strengthExercises = workout.strengthExercises
             foundWorkout.strengthDuration = workout.strengthDuration
-            foundWorkout.enduranceExercise = workout.enduranceExercise
+            foundWorkout.enduranceExercises = workout.enduranceExercises
             foundWorkout.enduranceDuration = workout.enduranceDuration
             foundWorkout.enduranceRounds = workout.enduranceRounds
         }

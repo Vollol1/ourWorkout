@@ -56,13 +56,13 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
                     android:orientation="vertical">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        android:layout_margin="8dp"
                         android:padding="8dp">
 
                         <TextView
@@ -70,7 +70,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="48dp"
                             android:layout_marginRight="8dp"
-                            android:text="@string/manage_workout_activity_text_addStrengthExercise"
+                            android:text="@string/manage_workout_activity_text_chooseStrengthExercise"
                             android:gravity="center"
                             android:textSize="14sp" />
 
@@ -83,21 +83,21 @@
 
                     </LinearLayout>
 
+                    <Button
+                        android:id="@+id/btnAddStrengthExercise"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:text="@string/manage_workout_activity_button_addExercise" />
+
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/recyclerViewStrengthExercise"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="16dp"
                         android:scrollbars="vertical"
                         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -111,7 +111,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="48dp"
                             android:layout_marginRight="8dp"
-                            android:text="@string/manage_workout_activity_text_addEnduranceExercise"
+                            android:text="@string/manage_workout_activity_text_chooseEnduranceExercise"
                             android:gravity="center"
                             android:textSize="14sp" />
 
@@ -124,13 +124,20 @@
 
                     </LinearLayout>
 
+                    <Button
+                        android:id="@+id/btnAddEnduranceExercise"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:text="@string/manage_workout_activity_button_addExercise" />
+
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/recyclerViewEnduranceExercise"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="32dp"
                         android:scrollbars="vertical"
-                        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+                        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
 
                 </LinearLayout>
 

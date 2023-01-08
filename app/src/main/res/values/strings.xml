@@ -31,12 +31,13 @@
     <!-- ManageWorkoutActivity-->
     <string name="manage_workout_activity_hint_workoutTitle">Workout Title</string>
     <string name="manage_workout_activity_button_saveExercise">Save Workout</string>
-    <string name="manage_workout_activity_button_addStrengthExercise">Add Strength-Exercise</string>
-    <string name="manage_workout_activity_button_addEnduranceExercise">Add Endurance-Exercise</string>
-    <string name="manage_workout_activity_snack_infosMissing">Please provide at least a Title</string>
-    <string name="manage_workout_activity_text_infosMissing">Please provide at least a Title</string>
-    <string name="manage_workout_activity_text_addStrengthExercise">Add strength Exercises</string>
-    <string name="manage_workout_activity_text_addEnduranceExercise">Add endurance Exercises</string>
+    <string name="manage_workout_activity_button_addExercise">Add Exercise</string>
+    <string name="manage_workout_activity_snack_infoTitelMissing">Please provide at least a Title</string>
+    <string name="manage_workout_activity_snack_noExerciseAvailable">No Exercise available - Please create first an Exercise</string>
+    <string name="manage_workout_activity_text_chooseStrengthExercise">Choose strength Exercises</string>
+    <string name="manage_workout_activity_text_chooseEnduranceExercise">Choose endurance Exercises</string>
+
+
 
     <!-- ManageWorkoutListActivity-->
     <string name="manage_workout_list_activity_toolbar_title">"Manage Workouts"</string>
