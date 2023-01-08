@@ -85,7 +85,7 @@ class ExerciseActivity : AppCompatActivity(){
             exercise.title = binding.exerciseTitle.text.toString()
             exercise.desc = binding.exerciseDesc.text.toString()
 
-            if (exercise.title.isNotEmpty() and exercise.name.isNotEmpty()) {
+            if (exercise.title.isNotEmpty()) {
                 if (edit) {
                     app.exercises.update(exercise.copy())
                 }
@@ -111,7 +111,7 @@ class ExerciseActivity : AppCompatActivity(){
     /******************Menu bar*******************/
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.menu_exercise_activity, menu)
+        menuInflater.inflate(R.menu.menu_activity, menu)
         if(edit)menu.getItem(1).isVisible = true
         return super.onCreateOptionsMenu(menu)
     }

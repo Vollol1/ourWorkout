@@ -2,7 +2,8 @@ package org.vollol.ourworkout.models
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
-import java.util.*
+import java.time.LocalDateTime
+
 
 @Parcelize
 data class Exercise(var id: Long = 0,
@@ -21,10 +22,10 @@ data class Exercise(var id: Long = 0,
 @Parcelize
 data class Workout(var blueprintId: Long = 0,
                    var workoutDoneId: Long = 0,
-                   var timeStamp: Date,
-                   var title: String,
-                   var strengthExercise: List<Exercise>,
-                   var strengthDuration: Int,
-                   var enduranceExercise: List<Exercise>,
-                   var enduranceRounds: Int,
-                   var enduranceDuration: Int) : Parcelable
+                   var timeStamp: LocalDateTime = LocalDateTime.now(),
+                   var title: String = "",
+                   var strengthExercise: MutableList<Exercise> = mutableListOf<Exercise>(),
+                   var strengthDuration: Int = 0,
+                   var enduranceExercise: MutableList<Exercise> = mutableListOf<Exercise>(),
+                   var enduranceRounds: Int = 0,
+                   var enduranceDuration: Int = 0) : Parcelable

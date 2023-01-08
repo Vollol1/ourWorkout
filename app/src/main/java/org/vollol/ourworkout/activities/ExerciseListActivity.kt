@@ -66,7 +66,7 @@ class ExerciseListActivity : AppCompatActivity(), ExerciseListener {
     /******************Menu bar*******************/
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.menu_exercise_list_activity, menu)
+        menuInflater.inflate(R.menu.menu_list_activity, menu)
         return super.onCreateOptionsMenu(menu)
     }
 
