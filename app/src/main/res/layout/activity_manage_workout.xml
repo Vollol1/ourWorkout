@@ -8,7 +8,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -30,7 +30,7 @@
 
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_below="@id/appBarLayout"
             android:fillViewport="true">
 
@@ -87,7 +87,7 @@
                         android:id="@+id/btnAddStrengthExercise"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="8dp"
+                        android:layout_marginVertical="8dp"
                         android:text="@string/manage_workout_activity_button_addExercise" />
 
 
@@ -95,6 +95,7 @@
                         android:id="@+id/recyclerViewStrengthExercise"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_margin="16dp"
                         android:scrollbars="vertical"
                         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
@@ -128,13 +129,14 @@
                         android:id="@+id/btnAddEnduranceExercise"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="8dp"
+                        android:layout_marginVertical="8dp"
                         android:text="@string/manage_workout_activity_button_addExercise" />
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/recyclerViewEnduranceExercise"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_margin="16dp"
                         android:scrollbars="vertical"
                         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 

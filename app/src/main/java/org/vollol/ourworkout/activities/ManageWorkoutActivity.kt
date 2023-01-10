@@ -87,8 +87,8 @@ class ManageWorkoutActivity : AppCompatActivity(){
         strengthSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 val item = parent?.getItemAtPosition(position)
-                i("Spinner selected: $item")
-                selectedStrengthExercise = item as Exercise
+                selectedStrengthExercise = (item as Exercise).copy()
+                i("Exercise '${selectedStrengthExercise.title.toString()}' was choosen")
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -100,8 +100,8 @@ class ManageWorkoutActivity : AppCompatActivity(){
         enduranceSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 val item = parent?.getItemAtPosition(position)
-                i("Spinner selected: $item")
-                selectedEnduranceExercise = item as Exercise
+                selectedEnduranceExercise = (item as Exercise).copy()
+                i("Exercise '${selectedEnduranceExercise.title.toString()}' was choosen")
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -111,10 +111,11 @@ class ManageWorkoutActivity : AppCompatActivity(){
         /*********************************spinners-end******************************************/
 
         binding.btnAddStrengthExercise.setOnClickListener() {
-            if(selectedStrengthExercise.title != "") {
-                workout.strengthExercises.add(selectedStrengthExercise)
+            if(selectedStrengthExercise.id != 0L) {
+                workout.strengthExercises.add(selectedStrengthExercise.copy())
                 //notify adapter that items have been changed
                 (binding.recyclerViewStrengthExercise.adapter)?.notifyDataSetChanged()
+                i("Exercise '${selectedStrengthExercise.title.toString()}' was added")
             }
             else{
                 Snackbar
@@ -124,10 +125,11 @@ class ManageWorkoutActivity : AppCompatActivity(){
         }
 
         binding.btnAddEnduranceExercise.setOnClickListener() {
-            if(selectedEnduranceExercise.title != "") {
-                workout.enduranceExercises.add(selectedEnduranceExercise)
+            if(selectedEnduranceExercise.id != 0L) {
+                workout.enduranceExercises.add(selectedEnduranceExercise.copy())
                 //notify adapter that items have been changed
                 (binding.recyclerViewEnduranceExercise.adapter)?.notifyDataSetChanged()
+                i("Exercise '${selectedEnduranceExercise.title.toString()}' was added")
             }
             else{
                 Snackbar
@@ -138,7 +140,6 @@ class ManageWorkoutActivity : AppCompatActivity(){
 
         binding.btnSave.setOnClickListener() {
             workout.title = binding.workoutTitle.text.toString()
-            //todo - copy choosen exercises
 
             if (workout.title.isNotEmpty()) {
                 if (edit) {
