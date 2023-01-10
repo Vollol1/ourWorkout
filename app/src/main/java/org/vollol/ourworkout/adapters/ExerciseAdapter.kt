@@ -7,8 +7,11 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager.widget.PagerAdapter
+import org.vollol.ourworkout.databinding.CardExerciseBinding
 import org.vollol.ourworkout.databinding.CardExerciseListBinding
 import org.vollol.ourworkout.models.Exercise
+import timber.log.Timber.i
 
 /*
 This interface will represent click events on the exercise Card,
@@ -59,6 +62,8 @@ class ExerciseRecyclerViewAdapter(private var exersices: List<Exercise>,
     }
 }
 
+//For implementation have a  look at https://www.youtube.com/watch?v=MeG-0MVP3jw
+
 class ExerciseSpinnerAdapter(context: Context, exercises: List<Exercise>) : ArrayAdapter<Exercise>(context, android.R.layout.simple_spinner_item, exercises) {
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
@@ -80,4 +85,40 @@ class ExerciseSpinnerAdapter(context: Context, exercises: List<Exercise>) : Arra
         }
         return view
     }
+}
+
+class ExerciseCardAdapter(private val context: Context,
+                          private val strengthExercises: List<Exercise>,
+                          private val enduranceExercises: List<Exercise>) : PagerAdapter(){
+
+    override fun isViewFromObject(view: View, `object`: Any): Boolean {
+        return view == `object`
+    }
+
+    override fun getCount(): Int {
+        return strengthExercises.size
+    }
+
+    override fun instantiateItem(container: ViewGroup, position: Int): Any {
+        //inflate layout card_exercise
+        val view = CardExerciseBinding.inflate(LayoutInflater.from(context), container, false)
+        //get data
+        val exercise = strengthExercises[position]
+
+        //set data to ui views
+        view.exerciseTitle.text = exercise.title
+        //todo bind other items also
+
+        //todo handle inputted numbers
+        i("Card Item instantiated with exercise: ${exercise.title.toString()}")
+
+        container.addView(view.root, position)
+
+        return view
+    }
+
+    override fun destroyItem(container: ViewGroup, position: Int, `object`: Any) {
+        container.removeView(`object` as View)
+    }
+
 }

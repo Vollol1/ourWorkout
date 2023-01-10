@@ -37,9 +37,21 @@
     <string name="manage_workout_activity_text_chooseStrengthExercise">Choose strength Exercises</string>
     <string name="manage_workout_activity_text_chooseEnduranceExercise">Choose endurance Exercises</string>
 
-
-
     <!-- ManageWorkoutListActivity-->
     <string name="manage_workout_list_activity_toolbar_title">"Manage Workouts"</string>
+
+
+    <!-- WorkoutActivity -->
+    <string name="workout_activity_text_exerciseTitle">Title</string>
+    <string name="workout_activity_text_exerciseName">Name</string>
+    <string name="workout_activity_text_exerciseDesc">Description</string>
+    <string name="workout_activity_text_exerciseRounds">Rounds</string>
+    <string name="workout_activity_text_exerciseRepetitions">Repetitions</string>
+    <string name="workout_activity_text_exerciseOnTime">On Time</string>
+    <string name="workout_activity_text_exerciseOffTime">Off Time</string>
+    <string name="workout_activity_text_exerciseRoundDuration">Round Duration</string>
+    <string name="workout_activity_text_exerciseUnit">Unit</string>
+    <string name="workout_activity_text_exerciseWeight">Weight</string>
+    <string name="workout_activity_text_exerciseCalories">Calories</string>
 
 </resources>
