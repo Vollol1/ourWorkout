@@ -83,12 +83,23 @@
 
         </LinearLayout>
 
-       <!--androidx.recyclerview.widget.RecyclerView
+       <TextView
+           android:id="@+id/textInfoStartWorkout"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:layout_margin="4dp"
+           android:text="@string/cockpit_activity_text_startWorkout"
+           android:textAlignment="center"
+           android:textSize="20sp"
+           android:textStyle="bold" />
+
+       <androidx.recyclerview.widget.RecyclerView
            android:id="@+id/recyclerViewDoWorkout"
            android:layout_width="match_parent"
            android:layout_height="match_parent"
+           android:layout_margin="4dp"
            android:scrollbars="vertical"
-           app:layout_behavior="@string/appbar_scrolling_view_behavior"/-->
+           app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
 
    </LinearLayout>

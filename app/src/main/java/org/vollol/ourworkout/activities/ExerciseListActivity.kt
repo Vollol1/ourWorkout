@@ -9,7 +9,7 @@ import android.view.MenuItem
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.recyclerview.widget.LinearLayoutManager
 import org.vollol.ourworkout.R
-import org.vollol.ourworkout.adapters.ExerciseAdapter
+import org.vollol.ourworkout.adapters.ExerciseRecyclerViewAdapter
 import org.vollol.ourworkout.adapters.ExerciseListener
 import org.vollol.ourworkout.databinding.ActivityExerciseListBinding
 import org.vollol.ourworkout.main.MainApp
@@ -39,7 +39,7 @@ class ExerciseListActivity : AppCompatActivity(), ExerciseListener {
         //include recyclerview
         val layoutManager = LinearLayoutManager(this)
         binding.recyclerView.layoutManager = layoutManager
-        binding.recyclerView.adapter = ExerciseAdapter(app.exercises.findAll(),this)
+        binding.recyclerView.adapter = ExerciseRecyclerViewAdapter(app.exercises.findAll(),this)
     }
 
     /******************Recycler view*******************/
@@ -66,7 +66,7 @@ class ExerciseListActivity : AppCompatActivity(), ExerciseListener {
     /******************Menu bar*******************/
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.menu_exercise_list_activity, menu)
+        menuInflater.inflate(R.menu.menu_list_activity, menu)
         return super.onCreateOptionsMenu(menu)
     }
 
@@ -74,8 +74,7 @@ class ExerciseListActivity : AppCompatActivity(), ExerciseListener {
         //check if the id is equal to the item_add, defined in menu_exercise_list_activity.xml
         when(item.itemId) {
             R.id.item_add -> {
-                val launcherIntent = Intent(this,
-                    ExerciseActivity::class.java)
+                val launcherIntent = Intent(this, ExerciseActivity::class.java)
                 getResult.launch(launcherIntent)
             }
         }

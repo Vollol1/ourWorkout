@@ -25,8 +25,7 @@
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbarCancel"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:titleTextColor="@color/colorPrimary" />
+                android:layout_height="wrap_content"/>
         </com.google.android.material.appbar.AppBarLayout>
 
         <ScrollView
@@ -51,7 +50,6 @@
                     android:maxLength="25"
                     android:maxLines="1"
                     android:padding="8dp"
-                    android:textColor="@color/colorPrimary"
                     android:textSize="14sp" />
 
                 <EditText
@@ -65,7 +63,6 @@
                     android:maxLength="25"
                     android:maxLines="1"
                     android:padding="8dp"
-                    android:textColor="@color/colorPrimary"
                     android:textSize="14sp" />
 
                 <EditText
@@ -79,7 +76,6 @@
                     android:maxLength="250"
                     android:maxLines="1"
                     android:padding="8dp"
-                    android:textColor="@color/colorPrimary"
                     android:textSize="14sp" />
 
 
@@ -96,8 +92,8 @@
                         android:layout_height="48dp"
                         android:layout_marginRight="8dp"
                         android:layout_weight="5"
-                        android:text="@string/exercise_activity_hint_exerciseUnit"
-                        android:textColor="@color/colorPrimary"
+                        android:gravity="center"
+                        android:text="@string/exercise_activity_text_exerciseUnit"
                         android:textSize="16sp" />
 
                     <Spinner
@@ -107,7 +103,6 @@
                         android:layout_marginLeft="8dp"
                         android:layout_weight="1"
                         android:autofillHints="hint"
-                        android:textColor="@color/colorPrimary"
                         android:textSize="14sp" />
 
                 </LinearLayout>
@@ -124,7 +119,6 @@
                     android:paddingBottom="8dp"
                     android:stateListAnimator="@null"
                     android:text="@string/exercise_activity_button_addExercise"
-                    android:textColor="@color/colorPrimary"
                     android:textSize="16sp" />
 
             </LinearLayout>
