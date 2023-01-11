@@ -7,6 +7,7 @@
 
 
     <!-- ExerciseActivity-->
+    <string name="exercise_activity_title">Edit Exercise</string>
     <string name="app_name">ourWorkout</string>
     <string name="exercise_activity_hint_exerciseTitle">Title</string>
     <string name="exercise_activity_hint_exerciseName">Name</string>
@@ -29,6 +30,7 @@
 
 
     <!-- ManageWorkoutActivity-->
+    <string name="manage_workout_activity_title">Edit Workout</string>
     <string name="manage_workout_activity_hint_workoutTitle">Workout Title</string>
     <string name="manage_workout_activity_button_saveExercise">Save Workout</string>
     <string name="manage_workout_activity_button_addExercise">Add Exercise</string>

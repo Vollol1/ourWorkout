@@ -36,7 +36,7 @@ class ExerciseActivity : AppCompatActivity(){
         setContentView(binding.root)
 
         //including the menu-toolbar
-        binding.toolbarCancel.title = title
+        binding.toolbarCancel.title = getString(R.string.exercise_activity_title)
         setSupportActionBar(binding.toolbarCancel)
 
         //initialize app from instantiated MainApp-Class
@@ -45,8 +45,8 @@ class ExerciseActivity : AppCompatActivity(){
         /***********************************spinner********************************************/
         val spinner = findViewById<Spinner>(R.id.exerciseUnit)
         //ArrayAdapter, which shows strings out of a string-array
-        val items = resources.getStringArray(R.array.exercise_activity_units)
-        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, items)
+        val units = resources.getStringArray(R.array.exercise_activity_units)
+        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, units)
         //Set dropdown-layout for the spinner
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         //set adapter for the spinner

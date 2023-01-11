@@ -11,6 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         android:layout_centerInParent="true"
+        android:background="@drawable/shape_rect_back"
         android:orientation="vertical">
 
         <TextView
@@ -27,8 +28,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="4dp"
-            android:orientation="vertical"
-            android:background="@drawable/shape_rect">
+            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -93,16 +93,16 @@
             <LinearLayout
                 android:id="@+id/layoutRounds"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginHorizontal="4dp"
                 android:layout_weight="1"
                 android:orientation="vertical"
                 android:background="@drawable/shape_rect">
 
                 <TextView
+                    android:id="@+id/textRounds"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
                     android:text="@string/workout_activity_text_exerciseRounds"
                     android:gravity="center"
                     android:textSize="16sp"/>
@@ -111,9 +111,8 @@
                     android:id="@+id/editRoundNumber"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:ems="10"
-                    android:inputType="number" />
+                    android:textSize="16sp"
+                    android:inputType="number"/>
 
             </LinearLayout>
 
@@ -121,16 +120,16 @@
             <LinearLayout
                 android:id="@+id/layoutRepetitions"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginHorizontal="4dp"
                 android:layout_weight="1"
                 android:orientation="vertical"
                 android:background="@drawable/shape_rect">
 
                 <TextView
+                    android:id="@+id/textRepetitions"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
                     android:text="@string/workout_activity_text_exerciseRepetitions"
                     android:gravity="center"
                     android:textSize="16sp"/>
@@ -139,8 +138,7 @@
                     android:id="@+id/editRepetitionNumber"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:ems="10"
+                    android:textSize="16sp"
                     android:inputType="number" />
 
             </LinearLayout>
@@ -159,16 +157,16 @@
             <LinearLayout
                 android:id="@+id/layoutOnTime"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginHorizontal="4dp"
                 android:layout_weight="1"
                 android:orientation="vertical"
                 android:background="@drawable/shape_rect">
 
                 <TextView
+                    android:id="@+id/textOnTime"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
                     android:text="@string/workout_activity_text_exerciseOnTime"
                     android:gravity="center"
                     android:textSize="16sp"/>
@@ -177,8 +175,7 @@
                     android:id="@+id/editOnTimeNumber"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:ems="10"
+                    android:textSize="16sp"
                     android:inputType="number" />
 
             </LinearLayout>
@@ -187,16 +184,16 @@
             <LinearLayout
                 android:id="@+id/layoutOffTime"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginHorizontal="4dp"
                 android:layout_weight="1"
                 android:orientation="vertical"
                 android:background="@drawable/shape_rect">
 
                 <TextView
+                    android:id="@+id/textOffTime"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
                     android:text="@string/workout_activity_text_exerciseOffTime"
                     android:gravity="center"
                     android:textSize="16sp"/>
@@ -205,8 +202,7 @@
                     android:id="@+id/editOffTimeNumber"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:ems="10"
+                    android:textSize="16sp"
                     android:inputType="number" />
 
             </LinearLayout>
@@ -225,16 +221,16 @@
             <LinearLayout
                 android:id="@+id/layoutRoundDuration"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginHorizontal="4dp"
                 android:layout_weight="1"
                 android:orientation="vertical"
                 android:background="@drawable/shape_rect">
 
                 <TextView
+                    android:id="@+id/textRoundDuration"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
                     android:text="@string/workout_activity_text_exerciseRoundDuration"
                     android:gravity="center"
                     android:textSize="16sp"/>
@@ -243,8 +239,7 @@
                     android:id="@+id/editRoundDurationNumber"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:ems="10"
+                    android:textSize="16sp"
                     android:inputType="number" />
 
             </LinearLayout>
@@ -253,16 +248,16 @@
             <LinearLayout
                 android:id="@+id/layoutUnit"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginHorizontal="4dp"
                 android:layout_weight="1"
                 android:orientation="vertical"
                 android:background="@drawable/shape_rect">
 
                 <TextView
+                    android:id="@+id/textUnit"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
                     android:text="@string/workout_activity_text_exerciseUnit"
                     android:gravity="center"
                     android:textSize="16sp"/>
@@ -271,8 +266,6 @@
                     android:id="@+id/editUnitNumber"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:ems="10"
                     android:inputType="numberDecimal" />
 
             </LinearLayout>

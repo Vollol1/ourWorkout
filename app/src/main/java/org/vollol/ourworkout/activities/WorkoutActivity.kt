@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.viewpager.widget.PagerAdapter
 import androidx.viewpager2.widget.ViewPager2
+import org.vollol.ourworkout.R
 import org.vollol.ourworkout.adapters.ExerciseViewPagerAdapter
 import org.vollol.ourworkout.databinding.ActivityWorkoutBinding
 import org.vollol.ourworkout.models.Workout
@@ -23,10 +24,9 @@ class WorkoutActivity : AppCompatActivity() {
         binding = ActivityWorkoutBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        /*including the menu-toolbar
+        //including the menu-toolbar
         binding.toolbar.title = title
         setSupportActionBar(binding.toolbar)
-        */
 
         //check intent, so who is calling the activity
         if(intent.hasExtra("workout_do")) {
@@ -39,9 +39,13 @@ class WorkoutActivity : AppCompatActivity() {
             workout = intent.extras?.getParcelable("workout_show")!!
         }
 
-        i("folgendes Workout wurde übergeben: ${workout.title.toString()}")
+        i("folgendes Workout wurde übergeben: ${workout.title}")
 
-        binding.viewPager2.adapter = ExerciseViewPagerAdapter(workout.strengthExercises)
+        //todo implement choosing workout.enduranceRounds in ManageWorkoutActivity
+        workout.enduranceRounds = 3
+
+        binding.viewPager2.adapter = ExerciseViewPagerAdapter(
+            workout.strengthExercises,workout.enduranceExercises, workout.enduranceRounds, resources.getStringArray(R.array.exercise_activity_units))
         binding.viewPager2.orientation = ViewPager2.ORIENTATION_HORIZONTAL
 
         binding.indicator.setViewPager(binding.viewPager2)
