@@ -1,8 +1,7 @@
 package org.vollol.ourworkout.activities
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.viewpager.widget.PagerAdapter
+import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.widget.ViewPager2
 import org.vollol.ourworkout.R
 import org.vollol.ourworkout.adapters.ExerciseViewPagerAdapter
@@ -44,10 +43,20 @@ class WorkoutActivity : AppCompatActivity() {
         //todo implement choosing workout.enduranceRounds in ManageWorkoutActivity
         workout.enduranceRounds = 3
 
-        binding.viewPager2.adapter = ExerciseViewPagerAdapter(
+        val adapter = ExerciseViewPagerAdapter(
             workout.strengthExercises,workout.enduranceExercises, workout.enduranceRounds, resources.getStringArray(R.array.exercise_activity_units))
+        binding.viewPager2.adapter = adapter
+
         binding.viewPager2.orientation = ViewPager2.ORIENTATION_HORIZONTAL
 
         binding.indicator.setViewPager(binding.viewPager2)
+
+        binding.viewPager2.registerOnPageChangeCallback(object: ViewPager2.OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
+                super.onPageSelected(position)
+                adapter.currentPosition = position
+
+            }
+        })
     }
 }

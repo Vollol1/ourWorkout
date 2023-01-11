@@ -7,9 +7,11 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager2.widget.ViewPager2
 import org.vollol.ourworkout.databinding.CardExerciseListBinding
 import org.vollol.ourworkout.databinding.ExercisePageBinding
 import org.vollol.ourworkout.models.Exercise
+import timber.log.Timber.i
 
 /*
 This interface will represent click events on the exercise Card,
@@ -93,9 +95,12 @@ class ExerciseSpinnerAdapter(context: Context, exercises: List<Exercise>) : Arra
 class ExerciseViewPagerAdapter(private var strengthExercises: List<Exercise>, var enduranceExercises: List<Exercise>,var enduranceRounds : Int, var units: Array<String>) :
     RecyclerView.Adapter<ExerciseViewPagerAdapter.Pager2ViewHolder>() {
 
+    var currentPosition = 0
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Pager2ViewHolder{
         val binding = ExercisePageBinding
             .inflate(LayoutInflater.from(parent.context), parent, false)
+
         return Pager2ViewHolder(binding)
     }
 
@@ -103,7 +108,7 @@ class ExerciseViewPagerAdapter(private var strengthExercises: List<Exercise>, va
         val exercise : Exercise
         val numOfStrExercises = strengthExercises.size
         val numOfEndExercises = enduranceExercises.size
-        val pos = holder.adapterPosition
+        val pos = currentPosition
         var actRound : Int = pos
         val isEndurance : Boolean
         //choose between strength and endurance Exercises
@@ -118,6 +123,8 @@ class ExerciseViewPagerAdapter(private var strengthExercises: List<Exercise>, va
             actRound++
             isEndurance = true
         }
+        i("choosen exercise: ${exercise.title}")
+        i("pos: $pos | position: $position")
         holder.bind(exercise, isEndurance, actRound)
     }
 
@@ -139,23 +146,36 @@ class ExerciseViewPagerAdapter(private var strengthExercises: List<Exercise>, va
 
             //layoutRounds
             if(isEndurance){
-                binding.textRounds.setText("Round")
+                binding.textRounds.text = "Round $enduranceRound/$enduranceRounds"
+                binding.editRoundNumber.visibility = View.INVISIBLE
             }
-            else {
+            else{
                 binding.editRoundNumber.setText(exercise.rounds.toString())
             }
 
-            //layoutRepetitions
-            binding.editRepetitionNumber.setText(exercise.repsPerRound.toString())
+            //if unit is calories Calories -> no repetitions needed
+            if(exercise.unit == units[0]){
+                binding.layoutRepetitions.visibility = View.INVISIBLE
+            }
+            else{
+                //layoutRepetitions
+                binding.editRepetitionNumber.setText(exercise.repsPerRound.toString())
+            }
 
-            //layoutOnTime
-            binding.editOnTimeNumber.setText(exercise.onTime.toString())
-
-            //layoutOffTime
-            binding.editOffTimeNumber.setText(exercise.offTime.toString())
-
-            //layoutRoundDuration
-            binding.editRoundDurationNumber.setText(exercise.roundDuration.toString())
+            //layoutOntime, layoutOffTime, layoutRoundDuration
+            if(isEndurance){
+                binding.layoutOnTime.visibility = View.INVISIBLE
+                binding.layoutOffTime.visibility = View.INVISIBLE
+                binding.layoutRoundDuration.visibility = View.INVISIBLE
+            }
+            else{
+                //layoutOnTime
+                binding.editOnTimeNumber.setText(exercise.onTime.toString())
+                //layoutOffTime
+                binding.editOffTimeNumber.setText(exercise.offTime.toString())
+                //layoutRoundDuration
+                binding.editRoundDurationNumber.setText(exercise.roundDuration.toString())
+            }
 
             //layoutUnit
             when(exercise.unit){
@@ -174,9 +194,6 @@ class ExerciseViewPagerAdapter(private var strengthExercises: List<Exercise>, va
                     binding.layoutUnit.visibility = View.INVISIBLE
                 }
             }
-
-
         }
     }
-
 }
