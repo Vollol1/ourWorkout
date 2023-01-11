@@ -1,16 +1,14 @@
 package org.vollol.ourworkout.adapters
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
-import org.vollol.ourworkout.R
 import org.vollol.ourworkout.databinding.CardExerciseListBinding
+import org.vollol.ourworkout.databinding.ExercisePageBinding
 import org.vollol.ourworkout.models.Exercise
 
 /*
@@ -66,24 +64,22 @@ class ExerciseRecyclerViewAdapter(private var exersices: List<Exercise>,
 
 class ExerciseSpinnerAdapter(context: Context, exercises: List<Exercise>) : ArrayAdapter<Exercise>(context, android.R.layout.simple_spinner_item, exercises) {
 
-    @SuppressLint("SetTextI18n")
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
         val view = super.getView(position, convertView, parent)
         val exercise = getItem(position)
         val textView = view as TextView
         if (exercise != null) {
-            textView.text = exercise.title + " - " + exercise.unit
+            "${exercise.title} - ${exercise.unit}".also { textView.text = it }
         }
         return view
     }
 
-    @SuppressLint("SetTextI18n")
     override fun getDropDownView(position: Int, convertView: View?, parent: ViewGroup): View {
         val view = super.getDropDownView(position, convertView, parent)
         val exercise = getItem(position)
         val textView = view as TextView
         if (exercise != null) {
-            textView.text = exercise.title + " - " + exercise.unit
+            "${exercise.title} - ${exercise.unit}".also { textView.text = it }
         }
         return view
     }
@@ -91,30 +87,28 @@ class ExerciseSpinnerAdapter(context: Context, exercises: List<Exercise>) : Arra
 
 //For implementation have a  look at https://www.youtube.com/watch?v=xlonlt5fAzg
 
-class ExerciseViewPagerAdapter(private val exercise: List<Exercise>) : RecyclerView.Adapter<ExerciseViewPagerAdapter.Pager2ViewHolder>() {
+class ExerciseViewPagerAdapter(private var exercises: List<Exercise>) :
+    RecyclerView.Adapter<ExerciseViewPagerAdapter.Pager2ViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ExerciseViewPagerAdapter.Pager2ViewHolder{
-        return Pager2ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.exercise_page, parent, false))
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Pager2ViewHolder{
+        val binding = ExercisePageBinding
+            .inflate(LayoutInflater.from(parent.context), parent, false)
+        return Pager2ViewHolder(binding)
     }
 
-    override fun getItemCount(): Int {
-        return exercise.size
+    override fun onBindViewHolder(holder: Pager2ViewHolder, position: Int) {
+        val exercise = exercises[holder.adapterPosition]
+        holder.bind(exercise)
     }
 
-    override fun onBindViewHolder(holder: ExerciseViewPagerAdapter.Pager2ViewHolder, position: Int) {
-        holder.exerciseTitle.text = exercise[position].title
-        holder.exerciseDesc.text = exercise[position].desc
-    }
+    override fun getItemCount(): Int = exercises.size
 
-    inner class Pager2ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val exerciseTitle: TextView = itemView.findViewById(R.id.exerciseTitle)
-        val exerciseDesc: TextView = itemView.findViewById(R.id.exerciseDesc)
+    class Pager2ViewHolder(private val binding: ExercisePageBinding) :
+        RecyclerView.ViewHolder(binding.root){
 
-        init {
-            exerciseTitle.setOnClickListener{v: View ->
-                val position: Int = adapterPosition
-                Toast.makeText(itemView.context, "You clicked on item #${position +1}", Toast.LENGTH_SHORT).show()
-            }
+        fun bind(exercise: Exercise) {
+            binding.exerciseTitle.text = exercise.title
+            binding.exerciseDesc.text = exercise.desc
         }
     }
 

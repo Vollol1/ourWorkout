@@ -12,10 +12,9 @@ import timber.log.Timber.i
 class WorkoutActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityWorkoutBinding
-    private lateinit var adapter: PagerAdapter
 
     private var workout = Workout()
-    var doWorkout = false
+    private var doWorkout = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
