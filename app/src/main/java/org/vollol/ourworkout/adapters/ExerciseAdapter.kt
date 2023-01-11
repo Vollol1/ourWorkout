@@ -1,17 +1,17 @@
 package org.vollol.ourworkout.adapters
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
-import androidx.viewpager.widget.PagerAdapter
-import org.vollol.ourworkout.databinding.CardExerciseBinding
+import org.vollol.ourworkout.R
 import org.vollol.ourworkout.databinding.CardExerciseListBinding
 import org.vollol.ourworkout.models.Exercise
-import timber.log.Timber.i
 
 /*
 This interface will represent click events on the exercise Card,
@@ -66,6 +66,7 @@ class ExerciseRecyclerViewAdapter(private var exersices: List<Exercise>,
 
 class ExerciseSpinnerAdapter(context: Context, exercises: List<Exercise>) : ArrayAdapter<Exercise>(context, android.R.layout.simple_spinner_item, exercises) {
 
+    @SuppressLint("SetTextI18n")
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
         val view = super.getView(position, convertView, parent)
         val exercise = getItem(position)
@@ -76,6 +77,7 @@ class ExerciseSpinnerAdapter(context: Context, exercises: List<Exercise>) : Arra
         return view
     }
 
+    @SuppressLint("SetTextI18n")
     override fun getDropDownView(position: Int, convertView: View?, parent: ViewGroup): View {
         val view = super.getDropDownView(position, convertView, parent)
         val exercise = getItem(position)
@@ -87,38 +89,33 @@ class ExerciseSpinnerAdapter(context: Context, exercises: List<Exercise>) : Arra
     }
 }
 
-class ExerciseCardAdapter(private val context: Context,
-                          private val strengthExercises: List<Exercise>,
-                          private val enduranceExercises: List<Exercise>) : PagerAdapter(){
+//For implementation have a  look at https://www.youtube.com/watch?v=xlonlt5fAzg
 
-    override fun isViewFromObject(view: View, `object`: Any): Boolean {
-        return view == `object`
+class ExerciseViewPagerAdapter(private val exercise: List<Exercise>) : RecyclerView.Adapter<ExerciseViewPagerAdapter.Pager2ViewHolder>() {
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ExerciseViewPagerAdapter.Pager2ViewHolder{
+        return Pager2ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.exercise_page, parent, false))
     }
 
-    override fun getCount(): Int {
-        return strengthExercises.size
+    override fun getItemCount(): Int {
+        return exercise.size
     }
 
-    override fun instantiateItem(container: ViewGroup, position: Int): Any {
-        //inflate layout card_exercise
-        val view = CardExerciseBinding.inflate(LayoutInflater.from(context), container, false)
-        //get data
-        val exercise = strengthExercises[position]
-
-        //set data to ui views
-        view.exerciseTitle.text = exercise.title
-        //todo bind other items also
-
-        //todo handle inputted numbers
-        i("Card Item instantiated with exercise: ${exercise.title.toString()}")
-
-        container.addView(view.root, position)
-
-        return view
+    override fun onBindViewHolder(holder: ExerciseViewPagerAdapter.Pager2ViewHolder, position: Int) {
+        holder.exerciseTitle.text = exercise[position].title
+        holder.exerciseDesc.text = exercise[position].desc
     }
 
-    override fun destroyItem(container: ViewGroup, position: Int, `object`: Any) {
-        container.removeView(`object` as View)
+    inner class Pager2ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val exerciseTitle: TextView = itemView.findViewById(R.id.exerciseTitle)
+        val exerciseDesc: TextView = itemView.findViewById(R.id.exerciseDesc)
+
+        init {
+            exerciseTitle.setOnClickListener{v: View ->
+                val position: Int = adapterPosition
+                Toast.makeText(itemView.context, "You clicked on item #${position +1}", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
 }
