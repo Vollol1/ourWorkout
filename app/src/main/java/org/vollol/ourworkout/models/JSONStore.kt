@@ -8,6 +8,7 @@ import org.vollol.ourworkout.helpers.exists
 import org.vollol.ourworkout.helpers.*
 import timber.log.Timber
 import java.lang.reflect.Type
+import java.time.LocalDateTime
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -17,6 +18,7 @@ const val JSON_WORKOUTDONE_FILE = "workoutsdone.json"
 
 val gsonBuilder: Gson = GsonBuilder().setPrettyPrinting()
     .registerTypeAdapter(Uri::class.java, UriParser())
+    .registerTypeAdapter(LocalDateTime::class.java, LocalDateTimeConverter())
     .create()
 val listExerciseType: Type = object : TypeToken<ArrayList<Exercise>>() {}.type
 val listWorkoutType: Type = object : TypeToken<ArrayList<Workout>>() {}.type
@@ -173,5 +175,15 @@ class UriParser: JsonDeserializer<Uri>, JsonSerializer<Uri>{
         context: JsonSerializationContext?
     ): JsonElement {
         return JsonPrimitive(src.toString())
+    }
+}
+
+class LocalDateTimeConverter : JsonSerializer<LocalDateTime>, JsonDeserializer<LocalDateTime> {
+    override fun serialize(src: LocalDateTime?, typeOfSrc: Type?, context: JsonSerializationContext?): JsonElement {
+        return JsonPrimitive(src?.toString())
+    }
+
+    override fun deserialize(json: JsonElement?, typeOfT: Type?, context: JsonDeserializationContext?): LocalDateTime {
+        return LocalDateTime.parse(json?.asString)
     }
 }
