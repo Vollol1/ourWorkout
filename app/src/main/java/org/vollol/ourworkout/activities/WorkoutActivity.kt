@@ -52,6 +52,8 @@ class WorkoutActivity : AppCompatActivity() {
         binding.indicator.setViewPager(binding.viewPager2)
 
         binding.viewPager2.registerOnPageChangeCallback(object: ViewPager2.OnPageChangeCallback() {
+            // This method will be invoked when a new page becomes selected. Animation is not necessarily complete.
+            // position – Position index of the new selected page.
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
                 adapter.currentPosition = position

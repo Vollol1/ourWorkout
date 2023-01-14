@@ -12,6 +12,7 @@ import org.vollol.ourworkout.databinding.CardExerciseListBinding
 import org.vollol.ourworkout.databinding.ExercisePageBinding
 import org.vollol.ourworkout.models.Exercise
 import timber.log.Timber.i
+import kotlin.math.round
 
 /*
 This interface will represent click events on the exercise Card,
@@ -92,10 +93,14 @@ class ExerciseSpinnerAdapter(context: Context, exercises: List<Exercise>) : Arra
 
 
 //For implementation have a  look at https://www.youtube.com/watch?v=xlonlt5fAzg
-class ExerciseViewPagerAdapter(private var strengthExercises: List<Exercise>, var enduranceExercises: List<Exercise>,var enduranceRounds : Int, var units: Array<String>) :
+class ExerciseViewPagerAdapter(private var strengthExercises: List<Exercise>,
+                               var enduranceExercises: List<Exercise>,
+                               var enduranceRounds : Int,
+                               var units: Array<String>) :
     RecyclerView.Adapter<ExerciseViewPagerAdapter.Pager2ViewHolder>() {
 
     var currentPosition = 0
+    var oldPosition = 0
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Pager2ViewHolder{
         val binding = ExercisePageBinding
@@ -108,24 +113,28 @@ class ExerciseViewPagerAdapter(private var strengthExercises: List<Exercise>, va
         val exercise : Exercise
         val numOfStrExercises = strengthExercises.size
         val numOfEndExercises = enduranceExercises.size
-        val pos = currentPosition
+        val pos = position
+        var calculatedPos = pos
         var actRound : Int = pos
         val isEndurance : Boolean
         //choose between strength and endurance Exercises
         if(pos < numOfStrExercises) {
-            exercise = strengthExercises[pos]
+            exercise = strengthExercises[calculatedPos]
             isEndurance = false
         }
         else{
-            exercise = enduranceExercises[(pos-numOfStrExercises)%numOfEndExercises]
+            calculatedPos = (pos-numOfStrExercises)%numOfEndExercises
+            exercise = enduranceExercises[calculatedPos]
+
             //calculate actual endurance Round Number
             actRound  = ((pos-numOfStrExercises)/numOfEndExercises)
             actRound++
             isEndurance = true
         }
-        i("choosen exercise: ${exercise.title}")
-        i("pos: $pos | position: $position")
+        i("position: $pos, calcPos: $calculatedPos, isEndurance: $isEndurance, roundNr: $actRound")
         holder.bind(exercise, isEndurance, actRound)
+
+
     }
 
     override fun getItemCount() : Int{
@@ -139,6 +148,7 @@ class ExerciseViewPagerAdapter(private var strengthExercises: List<Exercise>, va
         RecyclerView.ViewHolder(binding.root){
 
         fun bind(exercise: Exercise, isEndurance: Boolean, enduranceRound: Int) {
+            i("bind - isEnd: $isEndurance, endRound: $enduranceRound, unit: ${exercise.unit}")
             //Info text
             binding.exerciseTitle.text = exercise.title
             binding.exerciseDesc.text = exercise.desc
