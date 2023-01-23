@@ -27,7 +27,7 @@ class WorkoutActivity : AppCompatActivity() {
         binding.toolbar.title = title
         setSupportActionBar(binding.toolbar)
 
-        //check intent, so who is calling the activity
+        //check intent, so who is calling the activity, and extract given workout
         if(intent.hasExtra("workout_do")) {
             doWorkout = true
             workout = intent.extras?.getParcelable("workout_do")!!
@@ -38,27 +38,29 @@ class WorkoutActivity : AppCompatActivity() {
             workout = intent.extras?.getParcelable("workout_show")!!
         }
 
-        i("folgendes Workout wurde übergeben: ${workout.title}")
+        i("Workoutactivity started with workout: ${workout.title}")
 
         //todo implement choosing workout.enduranceRounds in ManageWorkoutActivity
         workout.enduranceRounds = 3
 
         val adapter = ExerciseViewPagerAdapter(
-            workout.strengthExercises,workout.enduranceExercises, workout.enduranceRounds, resources.getStringArray(R.array.exercise_activity_units))
+            workout.strengthExercises,workout.enduranceExercises, workout.enduranceRounds,
+            resources.getStringArray(R.array.exercise_activity_units))
         binding.viewPager2.adapter = adapter
 
-        binding.viewPager2.orientation = ViewPager2.ORIENTATION_HORIZONTAL
+        binding.viewPager2.orientation = ViewPager2.ORIENTATION_VERTICAL
 
         binding.indicator.setViewPager(binding.viewPager2)
 
+        /*
         binding.viewPager2.registerOnPageChangeCallback(object: ViewPager2.OnPageChangeCallback() {
             // This method will be invoked when a new page becomes selected. Animation is not necessarily complete.
             // position – Position index of the new selected page.
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
-                adapter.currentPosition = position
 
             }
         })
+        */
     }
 }

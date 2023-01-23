@@ -7,12 +7,10 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import androidx.viewpager2.widget.ViewPager2
 import org.vollol.ourworkout.databinding.CardExerciseListBinding
 import org.vollol.ourworkout.databinding.ExercisePageBinding
 import org.vollol.ourworkout.models.Exercise
 import timber.log.Timber.i
-import kotlin.math.round
 
 /*
 This interface will represent click events on the exercise Card,
@@ -99,9 +97,6 @@ class ExerciseViewPagerAdapter(private var strengthExercises: List<Exercise>,
                                var units: Array<String>) :
     RecyclerView.Adapter<ExerciseViewPagerAdapter.Pager2ViewHolder>() {
 
-    var currentPosition = 0
-    var oldPosition = 0
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Pager2ViewHolder{
         val binding = ExercisePageBinding
             .inflate(LayoutInflater.from(parent.context), parent, false)
@@ -110,28 +105,26 @@ class ExerciseViewPagerAdapter(private var strengthExercises: List<Exercise>,
     }
 
     override fun onBindViewHolder(holder: Pager2ViewHolder, position: Int) {
-        val exercise : Exercise
+        val exercise: Exercise
         val numOfStrExercises = strengthExercises.size
         val numOfEndExercises = enduranceExercises.size
-        val pos = position
-        var calculatedPos = pos
-        var actRound : Int = pos
-        val isEndurance : Boolean
+        var exerciseIndex = position
+        var actRound: Int = position
+        val isEndurance: Boolean
         //choose between strength and endurance Exercises
-        if(pos < numOfStrExercises) {
-            exercise = strengthExercises[calculatedPos]
+        if (position < numOfStrExercises) {
+            exercise = strengthExercises[exerciseIndex]
             isEndurance = false
-        }
-        else{
-            calculatedPos = (pos-numOfStrExercises)%numOfEndExercises
-            exercise = enduranceExercises[calculatedPos]
+        } else {
+            exerciseIndex = (position - numOfStrExercises) % numOfEndExercises
+            exercise = enduranceExercises[exerciseIndex]
 
             //calculate actual endurance Round Number
-            actRound  = ((pos-numOfStrExercises)/numOfEndExercises)
+            actRound = ((position - numOfStrExercises) / numOfEndExercises)
             actRound++
             isEndurance = true
         }
-        i("position: $pos, calcPos: $calculatedPos, isEndurance: $isEndurance, roundNr: $actRound")
+        i("adapt.Pos: $position, ex.Index: $exerciseIndex, isEndurance: $isEndurance, roundNr: $actRound, ex.Title:${exercise.title}")
         holder.bind(exercise, isEndurance, actRound)
 
 
@@ -148,7 +141,6 @@ class ExerciseViewPagerAdapter(private var strengthExercises: List<Exercise>,
         RecyclerView.ViewHolder(binding.root){
 
         fun bind(exercise: Exercise, isEndurance: Boolean, enduranceRound: Int) {
-            i("bind - isEnd: $isEndurance, endRound: $enduranceRound, unit: ${exercise.unit}")
             //Info text
             binding.exerciseTitle.text = exercise.title
             binding.exerciseDesc.text = exercise.desc
