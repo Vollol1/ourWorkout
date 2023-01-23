@@ -55,11 +55,13 @@ class ExerciseJSONStore(private val context: Context) :ExerciseStore{
             foundExercise.title = exercise.title
             foundExercise.name = exercise.name
             foundExercise.desc = exercise.desc
+            foundExercise.isEndurance = exercise.isEndurance
             foundExercise.unit = exercise.unit
             foundExercise.calories = exercise.calories
             foundExercise.weight = exercise.weight
             foundExercise.repsPerRound = exercise.repsPerRound
             foundExercise.rounds = exercise.rounds
+            foundExercise.round = exercise.round
             foundExercise.roundDuration = exercise.roundDuration
             foundExercise.onTime = exercise.onTime
             foundExercise.offTime = exercise.offTime
@@ -88,14 +90,11 @@ class ExerciseJSONStore(private val context: Context) :ExerciseStore{
 }
 
 
-class WorkoutJSONStore(private val context: Context, private val isDoneWorkout: Boolean) :WorkoutStore{
+class WorkoutJSONStore(private val context: Context) :WorkoutStore{
     private var workouts = mutableListOf<Workout>()
     private var file = JSON_WORKOUT_FILE
 
     init {
-        if(isDoneWorkout){
-            file = JSON_WORKOUTDONE_FILE
-        }
         if(exists(context, file)) {
             deserialize()
         }
@@ -107,12 +106,7 @@ class WorkoutJSONStore(private val context: Context, private val isDoneWorkout: 
     }
 
     override fun create(workout: Workout){
-        if(isDoneWorkout) {
-            workout.workoutDoneId = generateRandomId()
-        }
-        else{
-            workout.blueprintId = generateRandomId()
-        }
+        workout.blueprintId = generateRandomId()
         workouts.add(workout)
         serialize()
     }
@@ -121,15 +115,9 @@ class WorkoutJSONStore(private val context: Context, private val isDoneWorkout: 
         val workoutsList = findAll() as ArrayList<Workout>
         var foundWorkout: Workout? = null
 
-        if(isDoneWorkout) {
-            foundWorkout = workoutsList.find { p -> p.workoutDoneId == workout.workoutDoneId }
-        }
-        else{
-            foundWorkout = workoutsList.find { p -> p.blueprintId == workout.blueprintId }
-        }
+        foundWorkout = workoutsList.find { p -> p.blueprintId == workout.blueprintId }
 
         if (foundWorkout != null) {
-            foundWorkout.timeStamp = workout.timeStamp
             foundWorkout.title = workout.title
             foundWorkout.strengthExercises = workout.strengthExercises
             foundWorkout.strengthDuration = workout.strengthDuration
@@ -141,6 +129,65 @@ class WorkoutJSONStore(private val context: Context, private val isDoneWorkout: 
     }
 
     override fun delete(workout: Workout) {
+        workouts.remove(workout)
+        serialize()
+    }
+
+    private fun serialize(){
+        val jsonString = gsonBuilder.toJson(workouts, listWorkoutType)
+        write(context, file, jsonString)
+    }
+
+    private fun deserialize(){
+        val jsonString = read(context, file)
+        workouts = gsonBuilder.fromJson(jsonString, listWorkoutType)
+    }
+
+    private fun logAll(){
+        workouts.forEach{ Timber.i("$it")}
+    }
+}
+
+
+class DoAbleWorkoutJSONStore(private val context: Context) :DoAbleWorkoutStore{
+    private var workouts = mutableListOf<DoAbleWorkout>()
+    private var file = JSON_WORKOUTDONE_FILE
+
+    init {
+        if(exists(context, file)) {
+            deserialize()
+        }
+    }
+
+    override fun findAll(): MutableList<DoAbleWorkout> {
+        logAll()
+        return workouts
+    }
+
+    override fun create(workout: DoAbleWorkout){
+        workout.workoutDoneId = generateRandomId()
+        workouts.add(workout)
+        serialize()
+    }
+
+    override fun update(workout: DoAbleWorkout){
+        val workoutsList = findAll() as ArrayList<DoAbleWorkout>
+        var foundWorkout: DoAbleWorkout? = null
+
+        foundWorkout = workoutsList.find { p -> p.workoutDoneId == workout.workoutDoneId }
+
+        if (foundWorkout != null) {
+            foundWorkout.title = workout.title
+            foundWorkout.timeStamp = workout.timeStamp
+            foundWorkout.exercises = workout.exercises
+            foundWorkout.strengthDuration = workout.strengthDuration
+            foundWorkout.enduranceDuration = workout.enduranceDuration
+            foundWorkout.enduranceRounds = workout.enduranceRounds
+        }
+        serialize()
+    }
+
+    override fun delete(workout: DoAbleWorkout) {
         workouts.remove(workout)
         serialize()
     }
