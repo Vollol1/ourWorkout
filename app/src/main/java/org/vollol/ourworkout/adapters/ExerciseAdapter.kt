@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import org.vollol.ourworkout.R
 import org.vollol.ourworkout.databinding.CardExerciseListBinding
 import org.vollol.ourworkout.databinding.ExercisePageBinding
 import org.vollol.ourworkout.models.Exercise
@@ -152,6 +153,8 @@ class ExerciseViewPagerAdapter(private var strengthExercises: List<Exercise>,
                 binding.editRoundNumber.visibility = View.INVISIBLE
             }
             else{
+                binding.textRounds.setText(R.string.workout_activity_text_exerciseRounds)
+                binding.editRoundNumber.visibility = View.VISIBLE
                 binding.editRoundNumber.setText(exercise.rounds.toString())
             }
 
@@ -160,6 +163,7 @@ class ExerciseViewPagerAdapter(private var strengthExercises: List<Exercise>,
                 binding.layoutRepetitions.visibility = View.INVISIBLE
             }
             else{
+                binding.layoutRepetitions.visibility = View.VISIBLE
                 //layoutRepetitions
                 binding.editRepetitionNumber.setText(exercise.repsPerRound.toString())
             }
@@ -171,6 +175,9 @@ class ExerciseViewPagerAdapter(private var strengthExercises: List<Exercise>,
                 binding.layoutRoundDuration.visibility = View.INVISIBLE
             }
             else{
+                binding.layoutOnTime.visibility = View.VISIBLE
+                binding.layoutOffTime.visibility = View.VISIBLE
+                binding.layoutRoundDuration.visibility = View.VISIBLE
                 //layoutOnTime
                 binding.editOnTimeNumber.setText(exercise.onTime.toString())
                 //layoutOffTime
@@ -183,11 +190,13 @@ class ExerciseViewPagerAdapter(private var strengthExercises: List<Exercise>,
             when(exercise.unit){
                 //Calories
                 units[0] -> {
+                    binding.layoutUnit.visibility = View.VISIBLE
                     binding.textUnit.text = units[0]
                     binding.editUnitNumber.setText(exercise.calories.toString())
                 }
                 //Kg
                 units[1] -> {
+                    binding.layoutUnit.visibility = View.VISIBLE
                     binding.textUnit.text = units[1]
                     binding.editUnitNumber.setText(exercise.weight.toString())
                 }

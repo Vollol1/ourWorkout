@@ -48,7 +48,7 @@ class WorkoutActivity : AppCompatActivity() {
             resources.getStringArray(R.array.exercise_activity_units))
         binding.viewPager2.adapter = adapter
 
-        binding.viewPager2.orientation = ViewPager2.ORIENTATION_VERTICAL
+        binding.viewPager2.orientation = ViewPager2.ORIENTATION_HORIZONTAL
 
         binding.indicator.setViewPager(binding.viewPager2)
 
