@@ -135,6 +135,7 @@ class ExerciseViewPagerAdapter(var exercises: List<Exercise>, var units: Array<S
                 binding.layoutRepetitions.visibility = View.INVISIBLE
             }
             else{
+                binding.layoutRepetitions.visibility = View.VISIBLE
                 //layoutRepetitions
                 binding.layoutRepetitions.visibility = View.VISIBLE
                 binding.editRepetitionNumber.setText(exercise.repsPerRound.toString())
