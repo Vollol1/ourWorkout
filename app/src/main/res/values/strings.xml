@@ -1,0 +1,60 @@
+<resources>
+    <!-- CockpitActivity-->
+    <string name="cockpit_activity_button_navManageWorkouts">Manage Workouts</string>
+    <string name="cockpit_activity_button_navManageExercises">Manage Exercises</string>
+    <string name="cockpit_activity_button_navShowResults">Show Results</string>
+    <string name="cockpit_activity_text_startWorkout">Choose Workout to start</string>
+
+
+    <!-- ExerciseActivity-->
+    <string name="exercise_activity_title">Edit Exercise</string>
+    <string name="app_name">ourWorkout</string>
+    <string name="exercise_activity_hint_exerciseTitle">Title</string>
+    <string name="exercise_activity_hint_exerciseName">Name</string>
+    <string name="exercise_activity_hint_exerciseDescription">Description</string>
+    <string name="exercise_activity_text_exerciseUnit">Unit:</string>
+    <string name="exercise_activity_snack_infosMissing">Please provide at least a Title</string>
+    <string name="exercise_activity_button_addExercise">Add Exercise</string>
+    <string name="exercise_activity_button_saveExercise">Save Exercise</string>
+    <string name="exercise_activity_menu_cancelExerciseActivity">Cancel</string>
+    <string name="exercise_activity_menu_deleteExerciseActivity">Delete</string>
+    <string-array name="exercise_activity_units">
+        <item>Calories</item>
+        <item>Kg</item>
+        <item>No Unit</item>
+    </string-array>
+
+    <!-- ExerciseListActivity-->
+    <string name="exercise_list_activity_toolbar_title">"Manage Exercises"</string>
+    <string name="menu_addExercise">Add</string>
+
+
+    <!-- ManageWorkoutActivity-->
+    <string name="manage_workout_activity_title">Edit Workout</string>
+    <string name="manage_workout_activity_hint_workoutTitle">Workout Title</string>
+    <string name="manage_workout_activity_button_saveExercise">Save Workout</string>
+    <string name="manage_workout_activity_button_addExercise">Add Exercise</string>
+    <string name="manage_workout_activity_snack_infoSomeMissing">Title and or Endurance Rounds missing</string>
+    <string name="manage_workout_activity_snack_noExerciseAvailable">No Exercise available - Please create first an Exercise</string>
+    <string name="manage_workout_activity_text_chooseStrengthExercise">Choose strength Exercises</string>
+    <string name="manage_workout_activity_text_chooseEnduranceExercise">Choose endurance Exercises</string>
+    <string name="manage_workout_activity_text_enduranceRounds">Endurance Rounds</string>
+
+    <!-- ManageWorkoutListActivity-->
+    <string name="manage_workout_list_activity_toolbar_title">"Manage Workouts"</string>
+
+
+    <!-- WorkoutActivity -->
+    <string name="workout_activity_text_exerciseTitle">Title</string>
+    <string name="workout_activity_text_exerciseName">Name</string>
+    <string name="workout_activity_text_exerciseDesc">Description</string>
+    <string name="workout_activity_text_exerciseRounds">Rounds</string>
+    <string name="workout_activity_text_exerciseRepetitions">Repetitions</string>
+    <string name="workout_activity_text_exerciseOnTime">On Time</string>
+    <string name="workout_activity_text_exerciseOffTime">Off Time</string>
+    <string name="workout_activity_text_exerciseRoundDuration">Round Duration</string>
+    <string name="workout_activity_text_exerciseUnit">Unit</string>
+    <string name="workout_activity_text_exerciseWeight">Weight</string>
+    <string name="workout_activity_text_exerciseCalories">Calories</string>
+
+</resources>
