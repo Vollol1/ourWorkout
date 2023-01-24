@@ -8,6 +8,7 @@ import org.vollol.ourworkout.helpers.exists
 import org.vollol.ourworkout.helpers.*
 import timber.log.Timber
 import java.lang.reflect.Type
+import java.time.LocalDateTime
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -17,9 +18,11 @@ const val JSON_WORKOUTDONE_FILE = "workoutsdone.json"
 
 val gsonBuilder: Gson = GsonBuilder().setPrettyPrinting()
     .registerTypeAdapter(Uri::class.java, UriParser())
+    .registerTypeAdapter(LocalDateTime::class.java, LocalDateTimeConverter())
     .create()
 val listExerciseType: Type = object : TypeToken<ArrayList<Exercise>>() {}.type
 val listWorkoutType: Type = object : TypeToken<ArrayList<Workout>>() {}.type
+val listDoAbleWorkoutType: Type = object : TypeToken<ArrayList<DoAbleWorkout>>() {}.type
 
 fun generateRandomId(): Long{
     return Random().nextLong()
@@ -53,11 +56,12 @@ class ExerciseJSONStore(private val context: Context) :ExerciseStore{
             foundExercise.title = exercise.title
             foundExercise.name = exercise.name
             foundExercise.desc = exercise.desc
+            foundExercise.isEndurance = exercise.isEndurance
             foundExercise.unit = exercise.unit
-            foundExercise.calories = exercise.calories
-            foundExercise.weight = exercise.weight
+            foundExercise.unitVal = exercise.unitVal
             foundExercise.repsPerRound = exercise.repsPerRound
             foundExercise.rounds = exercise.rounds
+            foundExercise.round = exercise.round
             foundExercise.roundDuration = exercise.roundDuration
             foundExercise.onTime = exercise.onTime
             foundExercise.offTime = exercise.offTime
@@ -86,15 +90,11 @@ class ExerciseJSONStore(private val context: Context) :ExerciseStore{
 }
 
 
-class WorkoutJSONStore(private val context: Context, private val isDoneWorkout: Boolean) :WorkoutStore{
+class WorkoutJSONStore(private val context: Context) :WorkoutStore{
     private var workouts = mutableListOf<Workout>()
-    private var file = JSON_WORKOUT_FILE
 
     init {
-        if(isDoneWorkout){
-            file = JSON_WORKOUTDONE_FILE
-        }
-        if(exists(context, file)) {
+        if(exists(context, JSON_WORKOUT_FILE)) {
             deserialize()
         }
     }
@@ -105,12 +105,7 @@ class WorkoutJSONStore(private val context: Context, private val isDoneWorkout: 
     }
 
     override fun create(workout: Workout){
-        if(isDoneWorkout) {
-            workout.workoutDoneId = generateRandomId()
-        }
-        else{
-            workout.blueprintId = generateRandomId()
-        }
+        workout.blueprintId = generateRandomId()
         workouts.add(workout)
         serialize()
     }
@@ -119,15 +114,9 @@ class WorkoutJSONStore(private val context: Context, private val isDoneWorkout: 
         val workoutsList = findAll() as ArrayList<Workout>
         var foundWorkout: Workout? = null
 
-        if(isDoneWorkout) {
-            foundWorkout = workoutsList.find { p -> p.workoutDoneId == workout.workoutDoneId }
-        }
-        else{
-            foundWorkout = workoutsList.find { p -> p.blueprintId == workout.blueprintId }
-        }
+        foundWorkout = workoutsList.find { p -> p.blueprintId == workout.blueprintId }
 
         if (foundWorkout != null) {
-            foundWorkout.timeStamp = workout.timeStamp
             foundWorkout.title = workout.title
             foundWorkout.strengthExercises = workout.strengthExercises
             foundWorkout.strengthDuration = workout.strengthDuration
@@ -145,12 +134,70 @@ class WorkoutJSONStore(private val context: Context, private val isDoneWorkout: 
 
     private fun serialize(){
         val jsonString = gsonBuilder.toJson(workouts, listWorkoutType)
-        write(context, file, jsonString)
+        write(context, JSON_WORKOUT_FILE, jsonString)
     }
 
     private fun deserialize(){
-        val jsonString = read(context, file)
+        val jsonString = read(context, JSON_WORKOUT_FILE)
         workouts = gsonBuilder.fromJson(jsonString, listWorkoutType)
+    }
+
+    private fun logAll(){
+        workouts.forEach{ Timber.i("$it")}
+    }
+}
+
+
+class DoAbleWorkoutJSONStore(private val context: Context) :DoAbleWorkoutStore{
+    private var workouts = mutableListOf<DoAbleWorkout>()
+
+    init {
+        if(exists(context, JSON_WORKOUTDONE_FILE)) {
+            deserialize()
+        }
+    }
+
+    override fun findAll(): MutableList<DoAbleWorkout> {
+        logAll()
+        return workouts
+    }
+
+    override fun create(workout: DoAbleWorkout){
+        workout.workoutDoneId = generateRandomId()
+        workouts.add(workout)
+        serialize()
+    }
+
+    override fun update(workout: DoAbleWorkout){
+        val workoutsList = findAll() as ArrayList<DoAbleWorkout>
+        var foundWorkout: DoAbleWorkout? = null
+
+        foundWorkout = workoutsList.find { p -> p.workoutDoneId == workout.workoutDoneId }
+
+        if (foundWorkout != null) {
+            foundWorkout.title = workout.title
+            foundWorkout.timeStamp = workout.timeStamp
+            foundWorkout.exercises = workout.exercises
+            foundWorkout.strengthDuration = workout.strengthDuration
+            foundWorkout.enduranceDuration = workout.enduranceDuration
+            foundWorkout.enduranceRounds = workout.enduranceRounds
+        }
+        serialize()
+    }
+
+    override fun delete(workout: DoAbleWorkout) {
+        workouts.remove(workout)
+        serialize()
+    }
+
+    private fun serialize(){
+        val jsonString = gsonBuilder.toJson(workouts, listDoAbleWorkoutType)
+        write(context, JSON_WORKOUTDONE_FILE, jsonString)
+    }
+
+    private fun deserialize(){
+        val jsonString = read(context, JSON_WORKOUTDONE_FILE)
+        workouts = gsonBuilder.fromJson(jsonString, listDoAbleWorkoutType)
     }
 
     private fun logAll(){
@@ -173,5 +220,15 @@ class UriParser: JsonDeserializer<Uri>, JsonSerializer<Uri>{
         context: JsonSerializationContext?
     ): JsonElement {
         return JsonPrimitive(src.toString())
+    }
+}
+
+class LocalDateTimeConverter : JsonSerializer<LocalDateTime>, JsonDeserializer<LocalDateTime> {
+    override fun serialize(src: LocalDateTime?, typeOfSrc: Type?, context: JsonSerializationContext?): JsonElement {
+        return JsonPrimitive(src?.toString())
+    }
+
+    override fun deserialize(json: JsonElement?, typeOfT: Type?, context: JsonDeserializationContext?): LocalDateTime {
+        return LocalDateTime.parse(json?.asString)
     }
 }

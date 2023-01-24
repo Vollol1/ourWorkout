@@ -34,6 +34,7 @@ class ManageWorkoutActivity : AppCompatActivity(){
     var selectedStrengthExercise = Exercise()
     var selectedEnduranceExercise = Exercise()
 
+    //todo implement choosing workout.enduranceRounds in ManageWorkoutActivity
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -42,7 +43,7 @@ class ManageWorkoutActivity : AppCompatActivity(){
         setContentView(binding.root)
 
         //including the menu-toolbar
-        binding.toolbarCancel.title = title
+        binding.toolbarCancel.title = getString(R.string.manage_workout_activity_title)
         setSupportActionBar(binding.toolbarCancel)
 
         //initialize app from instantiated MainApp-Class
