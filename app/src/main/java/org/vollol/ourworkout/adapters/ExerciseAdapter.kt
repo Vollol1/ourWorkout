@@ -92,10 +92,7 @@ class ExerciseSpinnerAdapter(context: Context, exercises: List<Exercise>) : Arra
 
 
 //For implementation have a  look at https://www.youtube.com/watch?v=xlonlt5fAzg
-class ExerciseViewPagerAdapter(private var strengthExercises: List<Exercise>,
-                               var enduranceExercises: List<Exercise>,
-                               var enduranceRounds : Int,
-                               var units: Array<String>) :
+class ExerciseViewPagerAdapter(var exercises: List<Exercise>, var units: Array<String>) :
     RecyclerView.Adapter<ExerciseViewPagerAdapter.Pager2ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Pager2ViewHolder{
@@ -106,55 +103,30 @@ class ExerciseViewPagerAdapter(private var strengthExercises: List<Exercise>,
     }
 
     override fun onBindViewHolder(holder: Pager2ViewHolder, position: Int) {
-        val exercise: Exercise
-        val numOfStrExercises = strengthExercises.size
-        val numOfEndExercises = enduranceExercises.size
-        var exerciseIndex = position
-        var actRound: Int = position
-        val isEndurance: Boolean
-        //choose between strength and endurance Exercises
-        if (position < numOfStrExercises) {
-            exercise = strengthExercises[exerciseIndex]
-            isEndurance = false
-        } else {
-            exerciseIndex = (position - numOfStrExercises) % numOfEndExercises
-            exercise = enduranceExercises[exerciseIndex]
-
-            //calculate actual endurance Round Number
-            actRound = ((position - numOfStrExercises) / numOfEndExercises)
-            actRound++
-            isEndurance = true
-        }
-        i("adapt.Pos: $position, ex.Index: $exerciseIndex, isEndurance: $isEndurance, roundNr: $actRound, ex.Title:${exercise.title}")
-        holder.bind(exercise, isEndurance, actRound)
-
-
+        holder.bind(exercises[holder.adapterPosition])
     }
 
     override fun getItemCount() : Int{
-        var numOfItems : Int = strengthExercises.size
-        //every single round of endurance exercises will be shown extra
-        numOfItems += (enduranceExercises.size * enduranceRounds)
-        return numOfItems
+        return exercises.size
     }
 
     inner class Pager2ViewHolder(private val binding: ExercisePageBinding) :
         RecyclerView.ViewHolder(binding.root){
 
-        fun bind(exercise: Exercise, isEndurance: Boolean, enduranceRound: Int) {
+        fun bind(exercise: Exercise) {
             //Info text
             binding.exerciseTitle.text = exercise.title
             binding.exerciseDesc.text = exercise.desc
             binding.exerciseName.text = exercise.name
 
             //layoutRounds
-            if(isEndurance){
-                binding.textRounds.text = "Round $enduranceRound/$enduranceRounds"
+            if(exercise.isEndurance){
+                binding.textRounds.text = "Round ${exercise.round}"
                 binding.editRoundNumber.visibility = View.INVISIBLE
             }
             else{
-                binding.textRounds.setText(R.string.workout_activity_text_exerciseRounds)
                 binding.editRoundNumber.visibility = View.VISIBLE
+                binding.textRounds.setText(R.string.workout_activity_text_exerciseRounds)
                 binding.editRoundNumber.setText(exercise.rounds.toString())
             }
 
@@ -165,11 +137,12 @@ class ExerciseViewPagerAdapter(private var strengthExercises: List<Exercise>,
             else{
                 binding.layoutRepetitions.visibility = View.VISIBLE
                 //layoutRepetitions
+                binding.layoutRepetitions.visibility = View.VISIBLE
                 binding.editRepetitionNumber.setText(exercise.repsPerRound.toString())
             }
 
             //layoutOntime, layoutOffTime, layoutRoundDuration
-            if(isEndurance){
+            if(exercise.isEndurance){
                 binding.layoutOnTime.visibility = View.INVISIBLE
                 binding.layoutOffTime.visibility = View.INVISIBLE
                 binding.layoutRoundDuration.visibility = View.INVISIBLE
