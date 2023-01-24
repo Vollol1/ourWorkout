@@ -64,13 +64,13 @@ class WorkoutActivity : AppCompatActivity() {
 
         else if(intent.hasExtra("workout_show")){ //type is DoAbleWorkout
             doWorkout = false
-            workout = intent.extras?.getParcelable("workout_show")!!
+            workoutToDo = intent.extras?.getParcelable("workout_show")!!
         }
 
         i("Workoutactivity started with workout: ${workout.title}")
 
 
-        val adapter = ExerciseViewPagerAdapter(workoutToDo.exercises, resources.getStringArray(R.array.exercise_activity_units))
+        val adapter = ExerciseViewPagerAdapter(workoutToDo.exercises, resources.getStringArray(R.array.exercise_activity_units), doWorkout)
         binding.viewPager2.adapter = adapter
 
         binding.viewPager2.orientation = ViewPager2.ORIENTATION_HORIZONTAL

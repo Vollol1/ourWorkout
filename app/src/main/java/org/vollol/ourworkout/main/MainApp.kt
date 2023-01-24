@@ -24,9 +24,9 @@ class MainApp : Application() {
         workouts = WorkoutJSONStore(applicationContext)
         doneWorkouts = DoAbleWorkoutJSONStore(applicationContext)
 
-        val units = resources.getStringArray(R.array.exercise_activity_units)
 
-        //generate data for debugging
+        /*generate data for debugging
+        val units = resources.getStringArray(R.array.exercise_activity_units)
         exercises.create(Exercise(0,"DBL DB Snatch","Snatches","Take a dumbbell and lift it above your head", unit = units[1]))
         exercises.create(Exercise(0,"SB Carry","Sandbag Carry","Carry a Sandbag round by round", unit = units[1]))
         exercises.create((Exercise(0,"Standups", "Standups", "Lay down and stand up", unit = units[2])))
@@ -34,6 +34,8 @@ class MainApp : Application() {
         var strenEx : MutableList<Exercise> = exercises.findAll().subList(0,2).toMutableList()
         val durEx : MutableList<Exercise> = exercises.findAll().subList(2,4).toMutableList()
         workouts.create(Workout(0,  "Workout", strenEx, 0, durEx, 3))
+        */
+
 
 
         i("ourWorkout started")

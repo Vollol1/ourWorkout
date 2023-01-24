@@ -54,7 +54,7 @@ class ManageWorkoutActivity : AppCompatActivity(){
             workout = intent.extras?.getParcelable("workout_edit")!!
             //Set already stored values in text-fields
             binding.workoutTitle.setText(workout.title)
-            //todo - list choosen exercises
+            binding.enduranceRounds.setText(workout.enduranceRounds.toString())
         }
 
         /***********************************recycler views***********************************/
@@ -139,10 +139,14 @@ class ManageWorkoutActivity : AppCompatActivity(){
             }
         }
 
+
         binding.btnSave.setOnClickListener() {
             workout.title = binding.workoutTitle.text.toString()
+            if(binding.enduranceRounds.text.isNotEmpty()) {
+                workout.enduranceRounds = binding.enduranceRounds.text.toString().toInt()
+            }
 
-            if (workout.title.isNotEmpty()) {
+            if (workout.title.isNotEmpty() and (workout.enduranceRounds != 0)) {
                 if (edit) {
                     app.workouts.update(workout.copy())
                 }
@@ -158,7 +162,7 @@ class ManageWorkoutActivity : AppCompatActivity(){
 
             else{
                 Snackbar
-                    .make(it,R.string.manage_workout_activity_snack_infoTitelMissing, Snackbar.LENGTH_LONG)
+                    .make(it,R.string.manage_workout_activity_snack_infoSomeMissing, Snackbar.LENGTH_LONG)
                     .show()
             }
         }
