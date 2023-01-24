@@ -6,6 +6,7 @@ import androidx.viewpager2.widget.ViewPager2
 import org.vollol.ourworkout.R
 import org.vollol.ourworkout.adapters.ExerciseViewPagerAdapter
 import org.vollol.ourworkout.databinding.ActivityWorkoutBinding
+import org.vollol.ourworkout.databinding.ExercisePageBinding
 import org.vollol.ourworkout.main.MainApp
 import org.vollol.ourworkout.models.DoAbleWorkout
 import org.vollol.ourworkout.models.Workout
@@ -37,7 +38,7 @@ class WorkoutActivity : AppCompatActivity() {
         app = application as MainApp
 
         //check intent, so who is calling the activity, and extract given workout
-        if(intent.hasExtra("workout_do")) { //type is Workout
+        if(intent.hasExtra("workout_do")) { //given type is Workout
             doWorkout = true
             workout = intent.extras?.getParcelable("workout_do")!!
 
@@ -59,16 +60,6 @@ class WorkoutActivity : AppCompatActivity() {
                     workoutToDo.exercises.add(ex.copy())
                 }
             }
-
-
-            var titles = String()
-            for(ex in workoutToDo.exercises){
-                titles += ex.title + "| "
-            }
-            i("created doableWorkout: ${workoutToDo.title}")
-            i("containing exercises: $titles")
-            //todo - copy created workout into main storage
-            //app.doneWorkouts.create(workoutToDo.copy())
         }
 
         else if(intent.hasExtra("workout_show")){ //type is DoAbleWorkout
@@ -79,23 +70,19 @@ class WorkoutActivity : AppCompatActivity() {
         i("Workoutactivity started with workout: ${workout.title}")
 
 
-
         val adapter = ExerciseViewPagerAdapter(workoutToDo.exercises, resources.getStringArray(R.array.exercise_activity_units))
         binding.viewPager2.adapter = adapter
 
         binding.viewPager2.orientation = ViewPager2.ORIENTATION_HORIZONTAL
 
         binding.indicator.setViewPager(binding.viewPager2)
+    }
 
-        /*
-        binding.viewPager2.registerOnPageChangeCallback(object: ViewPager2.OnPageChangeCallback() {
-            // This method will be invoked when a new page becomes selected. Animation is not necessarily complete.
-            // position – Position index of the new selected page.
-            override fun onPageSelected(position: Int) {
-                super.onPageSelected(position)
-
-            }
-        })
-        */
+    override fun onPause() {
+        super.onPause()
+        //store new doneWorkout in global storage
+        if(doWorkout){
+            app.doneWorkouts.create(workoutToDo)
+        }
     }
 }

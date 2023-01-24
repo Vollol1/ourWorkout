@@ -22,6 +22,7 @@ val gsonBuilder: Gson = GsonBuilder().setPrettyPrinting()
     .create()
 val listExerciseType: Type = object : TypeToken<ArrayList<Exercise>>() {}.type
 val listWorkoutType: Type = object : TypeToken<ArrayList<Workout>>() {}.type
+val listDoAbleWorkoutType: Type = object : TypeToken<ArrayList<DoAbleWorkout>>() {}.type
 
 fun generateRandomId(): Long{
     return Random().nextLong()
@@ -57,8 +58,7 @@ class ExerciseJSONStore(private val context: Context) :ExerciseStore{
             foundExercise.desc = exercise.desc
             foundExercise.isEndurance = exercise.isEndurance
             foundExercise.unit = exercise.unit
-            foundExercise.calories = exercise.calories
-            foundExercise.weight = exercise.weight
+            foundExercise.unitVal = exercise.unitVal
             foundExercise.repsPerRound = exercise.repsPerRound
             foundExercise.rounds = exercise.rounds
             foundExercise.round = exercise.round
@@ -92,10 +92,9 @@ class ExerciseJSONStore(private val context: Context) :ExerciseStore{
 
 class WorkoutJSONStore(private val context: Context) :WorkoutStore{
     private var workouts = mutableListOf<Workout>()
-    private var file = JSON_WORKOUT_FILE
 
     init {
-        if(exists(context, file)) {
+        if(exists(context, JSON_WORKOUT_FILE)) {
             deserialize()
         }
     }
@@ -135,11 +134,11 @@ class WorkoutJSONStore(private val context: Context) :WorkoutStore{
 
     private fun serialize(){
         val jsonString = gsonBuilder.toJson(workouts, listWorkoutType)
-        write(context, file, jsonString)
+        write(context, JSON_WORKOUT_FILE, jsonString)
     }
 
     private fun deserialize(){
-        val jsonString = read(context, file)
+        val jsonString = read(context, JSON_WORKOUT_FILE)
         workouts = gsonBuilder.fromJson(jsonString, listWorkoutType)
     }
 
@@ -151,10 +150,9 @@ class WorkoutJSONStore(private val context: Context) :WorkoutStore{
 
 class DoAbleWorkoutJSONStore(private val context: Context) :DoAbleWorkoutStore{
     private var workouts = mutableListOf<DoAbleWorkout>()
-    private var file = JSON_WORKOUTDONE_FILE
 
     init {
-        if(exists(context, file)) {
+        if(exists(context, JSON_WORKOUTDONE_FILE)) {
             deserialize()
         }
     }
@@ -193,13 +191,13 @@ class DoAbleWorkoutJSONStore(private val context: Context) :DoAbleWorkoutStore{
     }
 
     private fun serialize(){
-        val jsonString = gsonBuilder.toJson(workouts, listWorkoutType)
-        write(context, file, jsonString)
+        val jsonString = gsonBuilder.toJson(workouts, listDoAbleWorkoutType)
+        write(context, JSON_WORKOUTDONE_FILE, jsonString)
     }
 
     private fun deserialize(){
-        val jsonString = read(context, file)
-        workouts = gsonBuilder.fromJson(jsonString, listWorkoutType)
+        val jsonString = read(context, JSON_WORKOUTDONE_FILE)
+        workouts = gsonBuilder.fromJson(jsonString, listDoAbleWorkoutType)
     }
 
     private fun logAll(){

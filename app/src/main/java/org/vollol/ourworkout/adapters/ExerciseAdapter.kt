@@ -120,6 +120,10 @@ class ExerciseViewPagerAdapter(var exercises: List<Exercise>, var units: Array<S
             binding.exerciseName.text = exercise.name
 
             //layoutRounds
+            binding.editRoundNumber.setOnClickListener(){
+                exercise.rounds = binding.editRoundNumber.text.toString().toInt()
+            }
+
             if(exercise.isEndurance){
                 binding.textRounds.text = "Round ${exercise.round}"
                 binding.editRoundNumber.visibility = View.INVISIBLE
@@ -131,6 +135,10 @@ class ExerciseViewPagerAdapter(var exercises: List<Exercise>, var units: Array<S
             }
 
             //if unit is calories Calories -> no repetitions needed
+            binding.editRepetitionNumber.setOnClickListener(){
+                exercise.repsPerRound = binding.editRepetitionNumber.text.toString().toInt()
+            }
+
             if(exercise.unit == units[0]){
                 binding.layoutRepetitions.visibility = View.INVISIBLE
             }
@@ -142,6 +150,18 @@ class ExerciseViewPagerAdapter(var exercises: List<Exercise>, var units: Array<S
             }
 
             //layoutOntime, layoutOffTime, layoutRoundDuration
+            binding.editOnTimeNumber.setOnClickListener(){
+                exercise.onTime = binding.editOnTimeNumber.text.toString().toInt()
+            }
+
+            binding.editOffTimeNumber.setOnClickListener(){
+                exercise.offTime = binding.editOffTimeNumber.text.toString().toInt()
+            }
+
+            binding.editRoundDurationNumber.setOnClickListener(){
+                exercise.roundDuration = binding.editRoundDurationNumber.text.toString().toInt()
+            }
+
             if(exercise.isEndurance){
                 binding.layoutOnTime.visibility = View.INVISIBLE
                 binding.layoutOffTime.visibility = View.INVISIBLE
@@ -160,24 +180,19 @@ class ExerciseViewPagerAdapter(var exercises: List<Exercise>, var units: Array<S
             }
 
             //layoutUnit
-            when(exercise.unit){
-                //Calories
-                units[0] -> {
-                    binding.layoutUnit.visibility = View.VISIBLE
-                    binding.textUnit.text = units[0]
-                    binding.editUnitNumber.setText(exercise.calories.toString())
-                }
-                //Kg
-                units[1] -> {
-                    binding.layoutUnit.visibility = View.VISIBLE
-                    binding.textUnit.text = units[1]
-                    binding.editUnitNumber.setText(exercise.weight.toString())
-                }
-                //None or not defined -> do not show field at all
-                else -> {
-                    binding.layoutUnit.visibility = View.INVISIBLE
-                }
+            binding.editUnitNumber.setOnClickListener(){
+                exercise.unitVal = binding.editUnitNumber.text.toString().toDouble()
             }
+
+            if (exercise.unit == units[2]){
+                binding.layoutUnit.visibility = View.INVISIBLE
+            }
+            else{
+                binding.layoutUnit.visibility = View.VISIBLE
+                binding.textUnit.text = exercise.unit
+                binding.editUnitNumber.setText(exercise.unitVal.toString())
+            }
+
         }
     }
 }
