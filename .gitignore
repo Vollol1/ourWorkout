@@ -17,3 +17,5 @@ local.properties
 
 # documentation - drawio temp files
 /01_Documentation/*.drawio.*
+
+/01_Documentation/assignment*
