@@ -30,11 +30,9 @@ Following features will be provided in the app.
 
 # Documentation :page_facing_up:
 
-For further informations about the app concept and design sketches have a look at **/01_Documentation/OurWorkout_vX_X.pdf**.
+For further informations about the app concept and design sketches have a look at **[/01_Documentation/OurWorkout_vX_X.pdf](./01_Documentation/OurWorkout_v0_1_2.pdf)**.
 
 # External resources :information_source:
-
-For 3d Party resources like icons, pictures and similar have a look at **/01_Documentation/resources.md**.
 
 ## Code inspiration and fragments
 
