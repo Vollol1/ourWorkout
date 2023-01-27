@@ -60,7 +60,7 @@
                     android:autofillHints="hint"
                     android:hint="@string/exercise_activity_hint_exerciseName"
                     android:inputType="text"
-                    android:maxLength="25"
+                    android:maxLength="60"
                     android:maxLines="1"
                     android:padding="8dp"
                     android:textSize="14sp" />
