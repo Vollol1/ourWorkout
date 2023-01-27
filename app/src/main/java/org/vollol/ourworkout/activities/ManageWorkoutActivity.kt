@@ -34,7 +34,6 @@ class ManageWorkoutActivity : AppCompatActivity(){
     var selectedStrengthExercise = Exercise()
     var selectedEnduranceExercise = Exercise()
 
-    //todo implement choosing workout.enduranceRounds in ManageWorkoutActivity
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 

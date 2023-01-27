@@ -4,7 +4,8 @@ Open-source app to provide crossfit workout plans and keep track of your persona
 
 # Summary :clipboard:
 
-ourWorkouts is a simple app that allows crossfit trainers to create multiple workout plans with different excersises. Members can subscribe to this workouts and keep track of their progress over time.
+ourWorkouts is a simple app that allows crossfit trainers to create multiple workout plans with different excersises.
+Also users can create whole workouts, fill in their results and show past workouts.
 
 # Features :white_check_mark:
 
@@ -17,6 +18,8 @@ Following features will be provided in the app.
     - Show old WOD results
     - Manage workout templates
         - Create template
+            - Adding Exercises
+            - Group Exercises in strength and endurance part
         - Edit template
         - Delete template
 - Manage excersises
@@ -25,13 +28,19 @@ Following features will be provided in the app.
     - Delete excersise
 
 
-# Documentation 
+# Documentation :page_facing_up:
 
 For further informations about the app concept and design sketches have a look at **/01_Documentation/OurWorkout_vX_X.pdf**.
 
 # External resources :information_source:
 
 For 3d Party resources like icons, pictures and similar have a look at **/01_Documentation/resources.md**.
+
+## Code inspiration and fragments
+
+- [Tutorial Dropdown Menu](https://www.youtube.com/watch?v=lAckLFH7mIE&t=292s)
+- [Tutorial Viewpager2 Swipeview and Bottom Circle Indicator](https://www.youtube.com/watch?v=xlonlt5fAzg)
+- [General Help with Android and Kotlin Programming](https://chat.openai.com/)
 
 ## Crossfit
 

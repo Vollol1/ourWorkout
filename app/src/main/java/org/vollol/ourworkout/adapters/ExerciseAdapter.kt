@@ -65,7 +65,7 @@ class ExerciseRecyclerViewAdapter(private var exersices: List<Exercise>,
 
 
 
-//For implementation have a  look at https://www.youtube.com/watch?v=MeG-0MVP3jw
+//For implementation have a  look at https://www.youtube.com/watch?v=lAckLFH7mIE&t=292s
 class ExerciseSpinnerAdapter(context: Context, exercises: List<Exercise>) : ArrayAdapter<Exercise>(context, android.R.layout.simple_spinner_item, exercises) {
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
